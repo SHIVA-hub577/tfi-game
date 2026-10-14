@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TFI Auction">
+  <meta name="description" content="TFI Auction - Offline Pass-and-Play Tollywood Movie Bidding Game for 2 to 4 players.">
+  <meta name="theme-color" content="#ffb703">
+  <title>TFI Auction – Tollywood Movie Auction Game</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+
+  <!-- Google Fonts with local fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Main Top Navigation -->
+    <header class="app-header">
+      <a href="#" class="brand-badge" id="brand-header-link" aria-label="TFI Auction Home">
+        <div class="brand-icon">🎬</div>
+        <div class="brand-text-wrap">
+          <span class="brand-text">TFI AUCTION</span>
+          <span class="brand-sub">Tollywood Bidding</span>
+        </div>
+      </a>
+      <div class="header-controls">
+        <button type="button" class="icon-btn" id="btn-toggle-sound" title="Toggle Sound" aria-label="Toggle Sound">🔊</button>
+        <button type="button" class="icon-btn" id="btn-open-settings" title="Settings" aria-label="Game Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- 1. HOME SCREEN -->
+    <main id="screen-home" class="screen">
+      <div class="hero-box">
+        <div class="cinema-reel-anim">🎬</div>
+        <h1 class="hero-title gold-gradient-text">TFI AUCTION</h1>
+        <p class="hero-tagline">
+          The ultimate pass-and-play Tollywood cinema bidding game for friends and family! Bid, raise, or drop to collect your dream Telugu movie catalog.
+        </p>
+
+        <!-- Saved Game Banner (if any) -->
+        <div id="home-resume-container"></div>
+
+        <div class="home-menu-grid">
+          <button type="button" class="btn btn-primary btn-lg" id="btn-home-play">
+            🎮 Start New Game
+          </button>
+          <button type="button" class="btn btn-secondary" id="btn-home-rules">
+            📖 How to Play (1 Min Guide)
+          </button>
+          <button type="button" class="btn btn-ghost" id="btn-home-history">
+            📜 Past Games History
+          </button>
+          <button type="button" class="btn btn-ghost" id="btn-home-catalog">
+            🎞️ Browse 20 Topics & Movies
+          </button>
+        </div>
+
+        <div class="feature-pills">
+          <div class="feat-pill">⚡ 100% Offline</div>
+          <div class="feat-pill">👥 2 to 4 Players</div>
+          <div class="feat-pill">🎬 20 Topics (350+ Movies)</div>
+          <div class="feat-pill">📱 Pass & Play (One Device)</div>
+          <div class="feat-pill">🔒 Zero Login / Privacy Safe</div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 2. SETUP SCREEN -->
+    <section id="screen-setup" class="screen hidden">
+      <div class="setup-container">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <h2 class="gold-gradient-text" style="font-size:1.6rem;">Game Setup</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-setup-back">✕ Cancel</button>
+        </div>
+
+        <!-- 1. Player Count -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">1</span>
+            <strong>Select Player Count</strong>
+          </div>
+          <div class="segmented-control" id="player-count-control">
+            <!-- Rendered dynamically (2, 3, 4 players) -->
+          </div>
+        </div>
+
+        <!-- 2. Player Names -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">2</span>
+            <strong>Enter Player Names</strong>
+          </div>
+          <div class="player-names-grid" id="player-names-grid">
+            <!-- Rendered dynamically with Tollywood random name generator -->
+          </div>
+        </div>
+
+        <!-- 3. Budget -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">3</span>
+            <strong>Starting Budget (Equal for all)</strong>
+          </div>
+          <div class="slider-wrap">
+            <div class="slider-header">
+              <span>Budget per player:</span>
+              <span class="slider-val-badge" id="budget-val-badge">50 🪙</span>
+            </div>
+            <input type="range" class="range-slider" id="budget-slider" min="20" max="70" step="1" value="50">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-dim);">
+              <span>Min: 20 🪙</span>
+              <span>Max: 70 🪙</span>
+            </div>
+          </div>
+          <div style="font-size:0.78rem; color:var(--text-muted); margin-top:2px;">Quick Select:</div>
+          <div class="chips-grid" id="budget-chips-container">
+            <!-- Rendered dynamically: 20, 30, 40, 50, 60, 70 -->
+          </div>
+        </div>
+
+        <!-- 4. Topic Selection -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">4</span>
+            <strong>Select Auction Topic</strong>
+          </div>
+          <div class="topic-filter-bar" id="topic-filter-bar">
+            <!-- Categories: All, General, Hero, Heroine, Director -->
+          </div>
+          <div class="topic-cards-grid" id="topic-cards-grid">
+            <!-- 20 Topics rendered dynamically -->
+          </div>
+        </div>
+
+        <!-- 5. Pool Size -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">5</span>
+            <strong>Movie Pool Size</strong>
+          </div>
+          <div class="slider-wrap">
+            <div class="slider-header">
+              <span>Movies to auction:</span>
+              <span class="slider-val-badge" id="pool-val-badge">15</span>
+            </div>
+            <input type="range" class="range-slider" id="pool-size-slider" min="6" max="30" value="15">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-dim);">
+              <span>Min: 6</span>
+              <span>Topic Max: <span id="pool-max-label">30</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6. Movies Per Player (Limit) -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">6</span>
+            <strong>Movies Per Player (Limit)</strong>
+          </div>
+          <div class="chips-grid" id="limit-chips-container">
+            <!-- Only valid options enabled -->
+          </div>
+          <div class="setup-formula-hint" id="setup-formula-hint">
+            Checking valid options...
+          </div>
+        </div>
+
+        <!-- 7. Turn Timer (Optional) -->
+        <div class="setup-card">
+          <div class="setup-card-title">
+            <span class="badge-num">7</span>
+            <strong>Turn Timer (Auto-Drop on Timeout)</strong>
+          </div>
+          <div class="chips-grid" id="timer-setting-chips">
+            <!-- Off, 10s, 15s, 20s, 30s -->
+          </div>
+        </div>
+
+        <!-- Error Container -->
+        <div class="setup-error-box hidden" id="setup-error-msg"></div>
+
+        <button type="button" class="btn btn-primary btn-lg" id="btn-start-game">
+          🔨 Enter Auction Arena
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. AUCTION ARENA (CORE SCREEN) -->
+    <section id="screen-auction" class="screen auction-screen hidden">
+      <!-- Top Progress Bar -->
+      <div class="auction-top-bar">
+        <div class="round-indicator">
+          <span>🎬</span>
+          <span id="auction-round-text">Movie 1 of 15</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px;">
+          <span class="topic-tag-pill" id="auction-topic-pill">Topic</span>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-open-collections-hud" title="View Won Collections">📦</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-end-game-early" title="End Game Early" style="color:var(--crimson-accent);">🛑</button>
+        </div>
+      </div>
+
+      <!-- Pass the Device / Turn Spotlight -->
+      <div class="turn-banner" id="turn-banner-strip">
+        <div class="turn-banner-left">
+          <div class="turn-avatar" id="turn-avatar-initial">M</div>
+          <div class="turn-text-wrap">
+            <span class="pass-device-prompt" id="pass-device-prompt">PASS DEVICE TO</span>
+            <span class="turn-player-name" id="turn-player-name">Mahesh's Turn</span>
+          </div>
+        </div>
+        <div class="timer-widget hidden" id="turn-timer-widget">
+          <span>⏱️</span>
+          <span id="turn-timer-text">15s</span>
+        </div>
+      </div>
+
+      <!-- Movie Card Spotlight -->
+      <div class="movie-card-spotlight">
+        <div class="movie-card-badge" id="spotlight-movie-badge">🎬 Any TFI Movies</div>
+        <h2 class="movie-card-title" id="spotlight-movie-title">Mayabazar</h2>
+        <div class="base-price-tag">Base Price: 1 Coin 🪙</div>
+      </div>
+
+      <!-- Bidding Podium -->
+      <div class="bidding-podium">
+        <span class="current-bid-label">Current Highest Bid</span>
+        <div class="current-bid-amount gold-gradient-text">
+          <span class="coin-icon">🪙</span>
+          <span id="current-bid-display">1</span>
+        </div>
+        <div id="leader-badge-container">
+          <!-- Leader avatar & name -->
+        </div>
+        
+        <!-- Reserve Limit HUD -->
+        <div class="reserve-hud">
+          <div class="reserve-hud-left">
+            <span>🛡️ Your Max Bid:</span>
+            <span class="reserve-hud-val" id="reserve-max-bid-val">97 🪙</span>
+          </div>
+          <small id="reserve-coins-locked" style="color:var(--text-dim); font-size:0.75rem;">2 🪙 reserved</small>
+        </div>
+      </div>
+
+      <!-- Interactive Bidding Controls Area -->
+      <div class="bidding-controls" id="auction-controls-container">
+        <!-- Injected dynamically: Opener Open button or Quick raise + Drop buttons -->
+      </div>
+
+      <!-- Secondary Controls Bar -->
+      <div class="secondary-actions-bar">
+        <button type="button" class="btn btn-ghost btn-sm" id="btn-undo-bid" disabled title="Undo Last Bid (Host Action)">
+          ↩️ Undo Last Bid
+        </button>
+      </div>
+    </section>
+
+    <!-- 4. RESULTS SCREEN -->
+    <section id="screen-results" class="screen hidden">
+      <div class="results-container">
+        <div class="results-header-box">
+          <div style="font-size:42px; margin-bottom:8px;">🏆</div>
+          <h2 class="results-title gold-gradient-text">Auction Concluded!</h2>
+          <p class="results-subtitle">
+            Every player has acquired their full Telugu cinema catalog. Check out everyone's collections and leftover budgets!
+          </p>
+        </div>
+
+        <!-- Highlights & Awards (No winner, but fun film badges) -->
+        <div class="highlights-grid" id="results-highlights-grid">
+          <!-- Rendered dynamically: Box Office King, Smart Producer, Blockbuster, Bargain Striker -->
+        </div>
+
+        <!-- Player Results Cards -->
+        <div class="results-players-grid" id="results-players-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+        <!-- Unplayed Movies Accordion -->
+        <div class="unplayed-section">
+          <button type="button" class="unplayed-toggle-btn" id="btn-toggle-unplayed">
+            <span>🎞️ Unplayed Movies in Pool (<span id="unplayed-count-badge">0</span>)</span>
+            <span>▼</span>
+          </button>
+          <div class="unplayed-pills hidden" id="unplayed-movies-container">
+            <!-- Unplayed titles -->
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div style="display:flex; flex-direction:column; gap:10px; max-width:440px; margin:10px auto 0; width:100%;">
+          <button type="button" class="btn btn-primary btn-lg" id="btn-play-again-same">
+            🔁 Play Again (Same Setup)
+          </button>
+          <button type="button" class="btn btn-secondary" id="btn-play-again-setup">
+            ⚙️ New Setup / Topic
+          </button>
+          <button type="button" class="btn btn-ghost" id="btn-share-results">
+            📋 Copy Game Summary
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. HOW TO PLAY (RULES SCREEN) -->
+    <section id="screen-rules" class="screen hidden">
+      <div class="rules-container">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+          <h2 class="gold-gradient-text" style="font-size:1.6rem;">How to Play TFI Auction</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-rules-back">✕ Back</button>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-icon">👥</div>
+          <div class="rule-text">
+            <h3>1. Setup & Equal Budgets</h3>
+            <p>2, 3, or 4 players play on one device. Everyone starts with the exact same budget of coins (e.g., 50 to 100 🪙). The host chooses 1 of 20 Tollywood topics and the target movies per player.</p>
+          </div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-icon">🔨</div>
+          <div class="rule-text">
+            <h3>2. Opening the Auction</h3>
+            <p>Movies are auctioned one by one. The rotating opener must place the opening bid at the base price of 1 coin. Every movie gets sold!</p>
+          </div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-icon">📈</div>
+          <div class="rule-text">
+            <h3>3. Bid, Raise, or Drop</h3>
+            <p>Turn passes clockwise. On your turn, you can Raise or Drop. Minimum raise is 1 coin up to 20, and 2 coins above 20. Quick raise buttons (+1, +2, +5) make bidding fast.</p>
+          </div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-icon">🛡️</div>
+          <div class="rule-text">
+            <h3>4. The Reserve Rule</h3>
+            <p>You can never get stuck without coins! You must reserve at least 1 coin for each other movie you still need to win: <strong>Max Bid = Coins Left − (Movies Needed − 1)</strong>. The screen automatically displays your max bid.</p>
+          </div>
+        </div>
+
+        <div class="rule-block">
+          <div class="rule-icon">🎬</div>
+          <div class="rule-text">
+            <h3>5. Winning & Game End</h3>
+            <p>When all other players drop, the last standing bidder wins the movie, pays the bid, and the movie joins their collection. Once you reach your limit, you sit out. The game ends when everyone has won their quota!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE SCOREBOARD DOCK (BOTTOM DOCK - FR-9) -->
+    <div id="scoreboard-dock" class="live-scoreboard-dock hidden">
+      <div class="scoreboard-grid" id="scoreboard-players-grid">
+        <!-- Rendered dynamically for live player status -->
+      </div>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- SOLD CELEBRATION MODAL -->
+  <div id="modal-sold" class="modal-overlay hidden">
+    <div class="modal-content sold-modal-content">
+      <div class="gavel-icon-anim">🔨</div>
+      <h2 class="sold-title">SOLD!</h2>
+      <div class="sold-movie-name" id="sold-movie-title">Movie Title</div>
+      <div class="sold-details-pill">
+        <span>Won by</span>
+        <strong id="sold-buyer-name" style="color:var(--gold-primary);">Player</strong>
+        <span>for</span>
+        <strong id="sold-price-paid" style="color:var(--cyan-neon);">1 🪙</strong>
+      </div>
+      <div id="sold-auto-award-badge" class="setup-formula-hint hidden" style="text-align:center;"></div>
+      <button type="button" class="btn btn-primary btn-lg" id="btn-sold-next-movie" style="margin-top:8px;">
+        Next Movie ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS DRAWER MODAL -->
+  <div id="modal-collections" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">📦 Player Collections</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modal-collections">✕</button>
+      </div>
+      <div id="collections-modal-body" style="display:flex; flex-direction:column; gap:12px;">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- PAST GAME HISTORY MODAL (FR-16) -->
+  <div id="modal-history" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">📜 Past Games History</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modal-history">✕</button>
+      </div>
+      <div id="history-modal-body" style="display:flex; flex-direction:column; gap:10px;">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- CATALOG MODAL (FR-17) -->
+  <div id="modal-catalog" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">🎞️ Tollywood Topic Catalog (20 Topics)</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modal-catalog">✕</button>
+      </div>
+      <div id="catalog-modal-body" style="display:flex; flex-direction:column; gap:12px;">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- DROP CONFIRMATION MODAL -->
+  <div id="modal-drop-confirm" class="modal-overlay hidden">
+    <div class="modal-content" style="max-width:380px; text-align:center;">
+      <h3 style="font-size:1.3rem; color:var(--crimson-accent);">Confirm Drop</h3>
+      <p id="drop-confirm-text" style="color:var(--text-muted); font-size:0.95rem; margin:10px 0 16px;">
+        Are you sure you want to drop out of bidding for this movie?
+      </p>
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="btn btn-ghost" id="btn-drop-confirm-cancel" style="flex:1;">Cancel</button>
+        <button type="button" class="btn btn-accent" id="btn-drop-confirm-yes" style="flex:1;">Yes, Drop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- END GAME CONFIRMATION MODAL -->
+  <div id="modal-end-confirm" class="modal-overlay hidden">
+    <div class="modal-content" style="max-width:400px; text-align:center;">
+      <h3 style="font-size:1.3rem; color:var(--crimson-accent);">End Game Early?</h3>
+      <p style="color:var(--text-muted); font-size:0.95rem; margin:10px 0 16px;">
+        End the auction now? Current movie collections and remaining coins will be saved and shown on the results screen.
+      </p>
+      <div style="display:flex; gap:10px;">
+        <button type="button" class="btn btn-ghost" id="btn-end-confirm-cancel" style="flex:1;">Cancel</button>
+        <button type="button" class="btn btn-accent" id="btn-end-confirm-yes" style="flex:1;">End Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS MODAL -->
+  <div id="modal-settings" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">⚙️ Game Settings</h3>
+        <button type="button" class="modal-close-btn" data-close-modal="modal-settings">✕</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <strong>Sound Effects & Fanfare</strong>
+            <div style="font-size:0.8rem; color:var(--text-dim);">Procedural Web Audio (100% offline)</div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-settings-sound-toggle">Toggle Sound</button>
+        </div>
+        <hr style="border:none; border-top:1px solid var(--border-subtle);">
+        <div>
+          <strong>Storage & Data</strong>
+          <p style="font-size:0.8rem; color:var(--text-dim); margin-top:4px;">
+            All data and game history are stored privately on your device.
+          </p>
+          <button type="button" class="btn btn-ghost btn-sm" id="btn-clear-history" style="margin-top:10px; color:var(--crimson-accent);">
+            🗑️ Clear Past Games History
+          </button>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-dim); text-align:center; margin-top:10px;">
+          TFI Auction v1.0 • Made for Tollywood Cinema Lovers
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts in dependency order -->
+  <script src="movies.js"></script>
+  <script src="audio.js"></script>
+  <script src="confetti.js"></script>
+  <script src="game.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
