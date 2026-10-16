@@ -269,48 +269,95 @@
       });
     }
 
-    // Skip this movie — any player can vote to skip before auction opens.
-    // Movie is only skipped when ALL eligible players have voted to skip.
+    // Skip this movie: if a player selects skip before auction opens,
+    // control moves to the next eligible player with the same skip option.
+    // If all eligible players select skip, the movie is skipped and not picked by anyone.
     skipMovie(playerId) {
       if (!this.auction || this.auction.isOpen) return { status: 'invalid' };
+      if (this.state === 'SKIPPED' || this.state === 'SOLD') return { status: 'invalid' };
 
-      // Prevent duplicate votes
-      if (this.auction.skipVotes.includes(playerId)) {
-        return { status: 'already_voted' };
+      const currentVoterId = playerId || this.auction.turnPlayerId;
+      if (!this.auction.skipVotes) {
+        this.auction.skipVotes = [];
       }
 
-      this.auction.skipVotes.push(playerId);
+      if (!this.auction.skipVotes.includes(currentVoterId)) {
+        this.auction.skipVotes.push(currentVoterId);
+      }
 
-      const eligibleCount = this.getPlayersNeedingMovies().length;
-      const votesNeeded = eligibleCount;
+      const eligiblePlayers = this.getPlayersNeedingMovies();
       const votesIn = this.auction.skipVotes.length;
+      const votesNeeded = eligiblePlayers.length;
 
+      // Check if ALL eligible players have voted to skip
       if (votesIn >= votesNeeded) {
-        // All players agreed — skip this movie
         if (!this.skippedMovies) this.skippedMovies = [];
         this.skippedMovies.push(this.auction.movie);
-        this.notify('MOVIE_SKIPPED', { movie: this.auction.movie });
-        this.startNextMovie();
-        return { status: 'skipped' };
+        this.state = 'SKIPPED';
+        this.notify('MOVIE_SKIPPED', {
+          movie: this.auction.movie,
+          skippedByAll: true,
+          skipVotes: this.auction.skipVotes
+        });
+        return { status: 'all_skipped' };
       }
 
-      // Notify UI of partial skip vote
-      this.notify('SKIP_VOTE_ADDED', {
-        voterId: playerId,
+      // Find next eligible player who hasn't skipped yet (clockwise order)
+      const currentIdx = eligiblePlayers.findIndex(p => p.id === currentVoterId);
+      let nextPlayer = null;
+      for (let i = 1; i <= eligiblePlayers.length; i++) {
+        const candidate = eligiblePlayers[(currentIdx + i) % eligiblePlayers.length];
+        if (!this.auction.skipVotes.includes(candidate.id)) {
+          nextPlayer = candidate;
+          break;
+        }
+      }
+
+      if (!nextPlayer) {
+        if (!this.skippedMovies) this.skippedMovies = [];
+        this.skippedMovies.push(this.auction.movie);
+        this.state = 'SKIPPED';
+        this.notify('MOVIE_SKIPPED', {
+          movie: this.auction.movie,
+          skippedByAll: true,
+          skipVotes: this.auction.skipVotes
+        });
+        return { status: 'all_skipped' };
+      }
+
+      // Pass opening turn & control to next eligible player
+      this.auction.turnPlayerId = nextPlayer.id;
+      this.auction.openerId = nextPlayer.id;
+
+      this.notify('PRE_AUCTION_TURN_CHANGED', {
+        previousPlayerId: currentVoterId,
+        turnPlayer: nextPlayer,
         votesIn,
-        votesNeeded
+        votesNeeded,
+        skipVotes: this.auction.skipVotes
       });
-      return { status: 'vote_added', votesIn, votesNeeded };
+
+      return { status: 'passed_to_next', nextPlayerId: nextPlayer.id, votesIn, votesNeeded };
     }
 
     // Opener places opening bid at base price (1 coin)
-    // PRD 5.2 #2: The opener must place the opening bid at the base price and cannot drop at this stage
     openAuction() {
       if (!this.auction || this.auction.isOpen) return;
 
       const opener = this.players.find(p => p.id === this.auction.openerId);
       if (!opener) return;
 
+      // Re-order active bidders starting with the actual opener who opened it
+      const eligiblePlayers = this.getPlayersNeedingMovies();
+      const openerIdxInEligible = eligiblePlayers.findIndex(p => p.id === opener.id);
+      const activeBidders = [];
+      for (let i = 0; i < eligiblePlayers.length; i++) {
+        const p = eligiblePlayers[(openerIdxInEligible + i) % eligiblePlayers.length];
+        activeBidders.push(p.id);
+      }
+
+      this.auction.activeBidders = activeBidders;
+      this.auction.turnPlayerId = opener.id;
       this.auction.isOpen = true;
       this.auction.currentBid = 1;
       this.auction.leaderId = opener.id;

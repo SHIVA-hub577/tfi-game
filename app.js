@@ -15,6 +15,7 @@
 
   const modals = {
     sold: document.getElementById('modal-sold'),
+    skipped: document.getElementById('modal-skipped'),
     collections: document.getElementById('modal-collections'),
     history: document.getElementById('modal-history'),
     settings: document.getElementById('modal-settings'),
@@ -145,7 +146,7 @@
         renderScoreboard();
         break;
 
-      case 'MOVIE_SKIPPED':
+      case 'PRE_AUCTION_TURN_CHANGED':
         stopTurnTimer();
         sound.click();
         renderAuctionArena();
@@ -153,8 +154,10 @@
         startTurnTimer();
         break;
 
-      case 'SKIP_VOTE_ADDED':
-        renderAuctionArena();
+      case 'MOVIE_SKIPPED':
+        stopTurnTimer();
+        sound.drop();
+        showSkippedCelebration(payload);
         renderScoreboard();
         break;
 
@@ -548,7 +551,12 @@
       if (turnNameEl) turnNameEl.textContent = `${turnPlayer.name}'s Turn`;
       if (turnAvatarEl) turnAvatarEl.textContent = turnPlayer.name.charAt(0).toUpperCase();
       if (passPromptEl) {
-        passPromptEl.textContent = !auction.isOpen ? 'PASS DEVICE TO OPENER' : 'PASS DEVICE TO CURRENT BIDDER';
+        if (!auction.isOpen) {
+          const skipVotes = auction.skipVotes || [];
+          passPromptEl.textContent = skipVotes.length > 0 ? 'PASS DEVICE TO NEXT PLAYER' : 'PASS DEVICE TO OPENER';
+        } else {
+          passPromptEl.textContent = 'PASS DEVICE TO CURRENT BIDDER';
+        }
       }
     }
 
@@ -568,38 +576,40 @@
     if (!controlsContainer) return;
 
     if (!auction.isOpen) {
-      // Opener view — show Open Auction button AND Skip Movie option
+      // Pre-Auction Opener / Skip decision view
       const skipVotes = auction.skipVotes || [];
-      const eligibleCount = engine.getPlayersNeedingMovies().length;
-      const hasCurrentPlayerVoted = turnPlayer && skipVotes.includes(turnPlayer.id);
+      const eligiblePlayers = engine.getPlayersNeedingMovies();
+      const eligibleCount = eligiblePlayers.length;
 
       let skipHintHtml = '';
       if (skipVotes.length > 0) {
-        // Build names of who voted
+        // Build names of who voted to skip
         const voterNames = skipVotes.map(vid => {
           const vp = engine.players.find(p => p.id === vid);
-          return vp ? escapeHtml(vp.name) : 'Someone';
+          return vp ? escapeHtml(vp.name) : 'A player';
         }).join(', ');
         skipHintHtml = `
-          <div class="skip-vote-hint">
-            ⏭️ ${voterNames} voted to skip &nbsp;•&nbsp; ${skipVotes.length}/${eligibleCount} needed
+          <div class="skip-vote-hint" style="margin-top:12px; padding:8px 12px; background:rgba(239,68,68,0.12); border:1px solid rgba(239,68,68,0.3); border-radius:8px; font-size:0.85rem; color:#fca5a5; text-align:center;">
+            ⏭️ ${voterNames} passed on opening &nbsp;•&nbsp; ${skipVotes.length}/${eligibleCount} skipped
           </div>
         `;
       }
 
       controlsContainer.innerHTML = `
         <div class="opener-action-box">
-          <p class="opener-hint">
-            <strong>${escapeHtml(turnPlayer?.name || 'Opener')}</strong> must place the opening bid at the base price to start the auction.
+          <p class="opener-hint" style="margin-bottom:14px; font-size:0.95rem;">
+            <strong>${escapeHtml(turnPlayer?.name || 'Player')}</strong>, do you want to open the auction or pass/skip?
           </p>
-          <button type="button" class="btn btn-primary btn-lg" id="btn-open-auction" style="animation: pulseGoldBorder 2s infinite;">
-            🔨 Open Auction (1 Coin)
-          </button>
+          <div style="display:flex; flex-direction:column; gap:10px; width:100%;">
+            <button type="button" class="btn btn-primary btn-lg" id="btn-open-auction" style="animation: pulseGoldBorder 2s infinite; font-size:1.05rem;">
+              🔨 Open Auction (1 Coin)
+            </button>
+            <button type="button" class="btn btn-secondary btn-md skip-movie-btn" id="btn-skip-movie"
+              style="border: 1px solid rgba(239, 68, 68, 0.45); color: #fca5a5; font-size:0.95rem; font-weight:600; padding:10px 16px;">
+              ⏭️ Skip This Movie (Pass Turn)
+            </button>
+          </div>
           ${skipHintHtml}
-          <button type="button" class="btn btn-ghost btn-sm skip-movie-btn" id="btn-skip-movie"
-            style="margin-top:10px; color:var(--text-dim); width:100%;" ${hasCurrentPlayerVoted ? 'disabled' : ''}>
-            ${hasCurrentPlayerVoted ? '✅ You voted to skip' : '⏭️ Skip This Movie'}
-          </button>
         </div>
       `;
       document.getElementById('btn-open-auction')?.addEventListener('click', () => {
@@ -759,8 +769,8 @@
     if (!auction) return;
 
     if (!auction.isOpen) {
-      // Opener timed out: auto-open
-      engine.openAuction();
+      // Player timed out before opening: auto-skip and pass turn to next player
+      engine.skipMovie(auction.turnPlayerId);
     } else {
       // Active bidder timed out: auto-drop
       engine.dropPlayer();
@@ -793,6 +803,24 @@
       } else {
         autoBadgeEl.classList.add('hidden');
       }
+    }
+
+    openModal(modal);
+  }
+
+  // --- SKIPPED CELEBRATION MODAL ---
+  function showSkippedCelebration(payload) {
+    const modal = modals.skipped;
+    if (!modal) return;
+
+    const movieTitleEl = document.getElementById('skipped-movie-title');
+    const reasonEl = document.getElementById('skipped-movie-reason');
+    if (movieTitleEl && payload.movie) {
+      movieTitleEl.textContent = payload.movie.title;
+    }
+    if (reasonEl) {
+      const skipCount = payload.skipVotes ? payload.skipVotes.length : (payload.movie ? engine.getPlayersNeedingMovies().length : 0);
+      reasonEl.textContent = `All eligible players (${skipCount}) voted to skip. This movie was not picked by anyone!`;
     }
 
     openModal(modal);
@@ -1135,6 +1163,13 @@
       sound.click();
       closeModal(modals.sold);
       confetti.clear();
+      engine.startNextMovie();
+    });
+
+    // Skipped Modal Next Movie button
+    document.getElementById('btn-skipped-next-movie')?.addEventListener('click', () => {
+      sound.click();
+      closeModal(modals.skipped);
       engine.startNextMovie();
     });
 
