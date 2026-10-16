@@ -145,6 +145,19 @@
         renderScoreboard();
         break;
 
+      case 'MOVIE_SKIPPED':
+        stopTurnTimer();
+        sound.click();
+        renderAuctionArena();
+        renderScoreboard();
+        startTurnTimer();
+        break;
+
+      case 'SKIP_VOTE_ADDED':
+        renderAuctionArena();
+        renderScoreboard();
+        break;
+
       case 'GAME_ENDED':
         stopTurnTimer();
         renderResults(payload);
@@ -555,7 +568,25 @@
     if (!controlsContainer) return;
 
     if (!auction.isOpen) {
-      // Opener view
+      // Opener view — show Open Auction button AND Skip Movie option
+      const skipVotes = auction.skipVotes || [];
+      const eligibleCount = engine.getPlayersNeedingMovies().length;
+      const hasCurrentPlayerVoted = turnPlayer && skipVotes.includes(turnPlayer.id);
+
+      let skipHintHtml = '';
+      if (skipVotes.length > 0) {
+        // Build names of who voted
+        const voterNames = skipVotes.map(vid => {
+          const vp = engine.players.find(p => p.id === vid);
+          return vp ? escapeHtml(vp.name) : 'Someone';
+        }).join(', ');
+        skipHintHtml = `
+          <div class="skip-vote-hint">
+            ⏭️ ${voterNames} voted to skip &nbsp;•&nbsp; ${skipVotes.length}/${eligibleCount} needed
+          </div>
+        `;
+      }
+
       controlsContainer.innerHTML = `
         <div class="opener-action-box">
           <p class="opener-hint">
@@ -564,10 +595,20 @@
           <button type="button" class="btn btn-primary btn-lg" id="btn-open-auction" style="animation: pulseGoldBorder 2s infinite;">
             🔨 Open Auction (1 Coin)
           </button>
+          ${skipHintHtml}
+          <button type="button" class="btn btn-ghost btn-sm skip-movie-btn" id="btn-skip-movie"
+            style="margin-top:10px; color:var(--text-dim); width:100%;" ${hasCurrentPlayerVoted ? 'disabled' : ''}>
+            ${hasCurrentPlayerVoted ? '✅ You voted to skip' : '⏭️ Skip This Movie'}
+          </button>
         </div>
       `;
       document.getElementById('btn-open-auction')?.addEventListener('click', () => {
         engine.openAuction();
+      });
+      document.getElementById('btn-skip-movie')?.addEventListener('click', () => {
+        if (!turnPlayer) return;
+        sound.click();
+        engine.skipMovie(turnPlayer.id);
       });
     } else {
       // Active Bidding Controls
@@ -891,14 +932,35 @@
           <div style="font-size:0.85rem; color:var(--text-muted);">
             Budget: ${g.budget} 🪙 • Target: ${g.moviesPerPlayer} movies/player
           </div>
-          <div style="display:flex; flex-direction:column; gap:4px; margin-top:6px;">
-            ${g.players.map(p => `
-              <div style="display:flex; justify-content:space-between; font-size:0.85rem; background:rgba(0,0,0,0.25); padding:4px 8px; border-radius:4px;">
-                <span>${escapeHtml(p.name)} (${p.movies.length} movies)</span>
-                <span style="color:var(--gold-primary);">${p.coinsLeft} 🪙 left</span>
-              </div>
-            `).join('')}
+          <div style="display:flex; flex-direction:column; gap:8px; margin-top:6px;">
+            ${g.players.map(p => {
+              const moviesHtml = (p.movies && p.movies.length > 0)
+                ? p.movies.map(m => `
+                    <div style="display:flex; justify-content:space-between; font-size:0.78rem; padding:2px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+                      <span style="color:var(--text-muted);">🎬 ${escapeHtml(m.title)}</span>
+                      <span style="color:var(--gold-primary);">${m.price} 🪙</span>
+                    </div>
+                  `).join('')
+                : '<div style="font-size:0.78rem; color:var(--text-dim); padding:2px 0;">No movies won</div>';
+
+              const skippedSection = (g.skippedMovies && g.skippedMovies.length > 0) ? '' : '';
+
+              return `
+                <div style="background:rgba(0,0,0,0.25); padding:8px 10px; border-radius:6px;">
+                  <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
+                    <span style="font-weight:600;">${escapeHtml(p.name)}</span>
+                    <span style="color:var(--gold-primary);">${p.coinsLeft} 🪙 left (spent ${p.totalSpent} 🪙)</span>
+                  </div>
+                  ${moviesHtml}
+                </div>
+              `;
+            }).join('')}
           </div>
+          ${g.skippedMovies && g.skippedMovies.length > 0 ? `
+            <div style="font-size:0.8rem; color:var(--text-dim); margin-top:6px;">
+              ⏭️ Skipped: ${g.skippedMovies.map(m => escapeHtml(m.title)).join(', ')}
+            </div>
+          ` : ''}
         </div>
       `).join('');
     }

@@ -257,7 +257,8 @@
         turnPlayerId: opener.id,
         openerId: opener.id,
         isOpen: false, // Opener must place opening bid
-        history: []
+        history: [],
+        skipVotes: [] // player IDs who voted to skip this movie
       };
 
       this.state = 'AUCTION';
@@ -266,6 +267,40 @@
         opener,
         basePrice: 1
       });
+    }
+
+    // Skip this movie — any player can vote to skip before auction opens.
+    // Movie is only skipped when ALL eligible players have voted to skip.
+    skipMovie(playerId) {
+      if (!this.auction || this.auction.isOpen) return { status: 'invalid' };
+
+      // Prevent duplicate votes
+      if (this.auction.skipVotes.includes(playerId)) {
+        return { status: 'already_voted' };
+      }
+
+      this.auction.skipVotes.push(playerId);
+
+      const eligibleCount = this.getPlayersNeedingMovies().length;
+      const votesNeeded = eligibleCount;
+      const votesIn = this.auction.skipVotes.length;
+
+      if (votesIn >= votesNeeded) {
+        // All players agreed — skip this movie
+        if (!this.skippedMovies) this.skippedMovies = [];
+        this.skippedMovies.push(this.auction.movie);
+        this.notify('MOVIE_SKIPPED', { movie: this.auction.movie });
+        this.startNextMovie();
+        return { status: 'skipped' };
+      }
+
+      // Notify UI of partial skip vote
+      this.notify('SKIP_VOTE_ADDED', {
+        voterId: playerId,
+        votesIn,
+        votesNeeded
+      });
+      return { status: 'vote_added', votesIn, votesNeeded };
     }
 
     // Opener places opening bid at base price (1 coin)
@@ -559,6 +594,7 @@
           openerPlayerIndex: this.openerPlayerIndex,
           auction: this.auction,
           timerDuration: this.timerDuration,
+          skippedMovies: this.skippedMovies || [],
           savedAt: Date.now()
         };
         localStorage.setItem(STORAGE_KEY_CURRENT, JSON.stringify(payload));
@@ -614,6 +650,7 @@
         this.openerPlayerIndex = data.openerPlayerIndex;
         this.auction = data.auction;
         this.timerDuration = data.timerDuration || 0;
+        this.skippedMovies = data.skippedMovies || [];
         this.undoStack = [];
 
         this.notify('GAME_RESUMED');
@@ -643,7 +680,8 @@
             coinsLeft: p.coins,
             totalSpent: this.budget - p.coins,
             movies: p.wonMovies
-          }))
+          })),
+          skippedMovies: this.skippedMovies || []
         };
         list.unshift(record);
         // keep last 20 games

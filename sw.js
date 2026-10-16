@@ -1,5 +1,5 @@
 // TFI Auction Service Worker - 100% Offline Cache
-const CACHE_NAME = 'tfi-auction-v4';
+const CACHE_NAME = 'tfi-auction-v5';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
