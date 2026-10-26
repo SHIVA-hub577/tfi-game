@@ -28,6 +28,7 @@
   let timerInterval = null;
   let timerRemaining = 0;
   let timerPaused = false;
+  let pendingDropPlayerId = null;
 
   // Sound alias
   const sound = window.TFI_SOUND;
@@ -84,19 +85,27 @@
 
   function openModal(modalEl) {
     if (modalEl) modalEl.classList.remove('hidden');
+    // Never let the turn timer run while a dialog needs the player's attention
+    timerPaused = true;
   }
 
   function closeModal(modalEl) {
     if (modalEl) modalEl.classList.add('hidden');
+    timerPaused = document.hidden;
   }
 
   // --- ENGINE EVENT SUBSCRIPTION ---
   engine.subscribe((event, payload) => {
     switch (event) {
       case 'GAME_STARTED':
+        renderScoreboard();
+        showScreen('auction');
+        break;
+
       case 'GAME_RESUMED':
         renderScoreboard();
         showScreen('auction');
+        resumeAuctionUi();
         break;
 
       case 'AUCTION_STARTED':
@@ -197,7 +206,12 @@
 
         document.getElementById('btn-resume-game')?.addEventListener('click', () => {
           sound.click();
-          engine.resumeSavedGame();
+          if (!engine.resumeSavedGame()) {
+            alert('That saved game could not be loaded. Starting a fresh setup.');
+            engine.clearSavedGame();
+            initHomeScreen();
+            return;
+          }
         });
 
         document.getElementById('btn-discard-saved')?.addEventListener('click', () => {
@@ -291,7 +305,9 @@
 
     let html = '';
     for (let i = 0; i < setupState.playersCount; i++) {
-      const currentName = setupState.playerNames[i] || `Player ${i + 1}`;
+      // Fill any gap defensively so an untouched slot is never submitted blank
+      if (!setupState.playerNames[i]) setupState.playerNames[i] = `Player ${i + 1}`;
+      const currentName = setupState.playerNames[i];
       html += `
         <div class="player-input-wrap">
           <div class="player-input-label">
@@ -430,7 +446,7 @@
     }).join('');
 
     grid.querySelectorAll('.topic-card').forEach(card => {
-      card.addEventListener('click', () => {
+      const activate = () => {
         sound.click();
         const id = card.dataset.topicId;
 
@@ -453,6 +469,14 @@
         renderTopicModeControls();
         renderTopicCards();
         updatePoolAndLimitControls();
+      };
+
+      card.addEventListener('click', activate);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
       });
     });
   }
@@ -579,6 +603,36 @@
     });
   }
 
+  // Restore the correct arena view (and modal) after resuming a saved game
+  function resumeAuctionUi() {
+    const auction = engine.auction;
+    if (!auction) {
+      showScreen('home');
+      initHomeScreen();
+      return;
+    }
+
+    renderAuctionArena();
+    startTurnTimer();
+
+    if (engine.state === 'SOLD') {
+      const winner = engine.players.find(p => (p.wonMovies || []).some(m => m.id === auction.movieId));
+      const won = winner ? winner.wonMovies.find(m => m.id === auction.movieId) : null;
+      showSoldCelebration({
+        movie: auction.movie,
+        buyer: winner || { name: 'Player' },
+        price: won ? won.price : auction.currentBid,
+        autoAwarded: !!auction.isAutoAwarded
+      });
+    } else if (engine.state === 'SKIPPED') {
+      showSkippedCelebration({
+        movie: auction.movie,
+        skippedByAll: true,
+        skipVotes: auction.skipVotes || []
+      });
+    }
+  }
+
   // --- AUCTION ARENA LOGIC ---
   function renderAuctionArena() {
     const auction = engine.auction;
@@ -597,6 +651,7 @@
     const topicPill = document.getElementById('auction-topic-pill');
     if (topicPill && engine.topic) {
       topicPill.textContent = engine.topic.name;
+      topicPill.title = (engine.topics || []).map(t => t.name).join(' + ');
     }
 
     // Movie Spotlight
@@ -769,6 +824,7 @@
         if (dropText && turnPlayer) {
           dropText.textContent = `${turnPlayer.name}, are you sure you want to drop out of bidding for "${auction.movie.title}"? You cannot re-enter this auction.`;
         }
+        pendingDropPlayerId = auction.turnPlayerId;
         openModal(dropModal);
       });
     }
@@ -825,6 +881,7 @@
   // --- TURN TIMER (FR-12) ---
   function startTurnTimer() {
     stopTurnTimer();
+    timerPaused = document.hidden || !!document.querySelector('.modal-overlay:not(.hidden)');
     const duration = engine.timerDuration;
     if (!duration || duration <= 0) {
       const widget = document.getElementById('turn-timer-widget');
@@ -888,7 +945,8 @@
 
   // Pause timer when document is hidden (sleep / tab switch)
   document.addEventListener('visibilitychange', () => {
-    timerPaused = document.hidden;
+    const modalOpen = !!document.querySelector('.modal-overlay:not(.hidden)');
+    timerPaused = document.hidden || modalOpen;
   });
 
   // --- SOLD CELEBRATION MODAL ---
@@ -938,6 +996,16 @@
   // --- RESULTS SCREEN LOGIC (FR-10) ---
   function renderResults(payload) {
     const { players, unplayedMovies, highlights } = payload;
+
+    // Honest subtitle: quotas are not always reached (early end / exhausted pool)
+    const subtitleEl = document.getElementById('results-subtitle');
+    if (subtitleEl) {
+      const quota = engine.moviesPerPlayer || 0;
+      const quotasMet = players.every(p => p.wonMovies.length >= quota);
+      subtitleEl.textContent = quotasMet
+        ? `Every player has acquired their full ${engine.topic ? engine.topic.name : 'TFI'} catalogue. Check out everyone's collections and leftover budgets!`
+        : 'The auction ended before every quota was filled. Here is what each player collected with the budget they had left.';
+    }
 
     // Highlights
     const hlContainer = document.getElementById('results-highlights-grid');
@@ -1080,8 +1148,6 @@
                   `).join('')
                 : '<div style="font-size:0.78rem; color:var(--text-dim); padding:2px 0;">No movies won</div>';
 
-              const skippedSection = (g.skippedMovies && g.skippedMovies.length > 0) ? '' : '';
-
               return `
                 <div style="background:rgba(0,0,0,0.25); padding:8px 10px; border-radius:6px;">
                   <div style="display:flex; justify-content:space-between; font-size:0.85rem; margin-bottom:4px;">
@@ -1181,7 +1247,7 @@
     const gap = 20;
     const totalH = Math.ceil(headerH + blocks.reduce((sum, b) => sum + b.height + gap, 0) + footerH);
 
-    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const dpr = totalH > 6000 ? 1 : Math.min(2, window.devicePixelRatio || 1);
     const canvas = document.createElement('canvas');
     canvas.width = W * dpr;
     canvas.height = totalH * dpr;
@@ -1265,10 +1331,22 @@
     if (!blob) throw new Error('Image generation failed');
 
     const fileName = `tfi-auction-${new Date().toISOString().slice(0, 10)}.png`;
-    const file = new File([blob], fileName, { type: 'image/png' });
     const shareText = `🎬 TFI Auction — ${engine.topic ? engine.topic.name : 'TFI Movies'}`;
 
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    // Native share sheet (WhatsApp, Instagram, Telegram...) when the browser
+    // supports sharing files; otherwise fall back to a normal PNG download.
+    let file = null;
+    let canShareFile = false;
+    if (typeof File === 'function') {
+      try {
+        file = new File([blob], fileName, { type: 'image/png' });
+        canShareFile = !!(navigator.canShare && navigator.canShare({ files: [file] }));
+      } catch (err) {
+        canShareFile = false;
+      }
+    }
+
+    if (canShareFile && file) {
       try {
         await navigator.share({ files: [file], title: 'TFI Auction Results', text: shareText });
         return 'shared';
@@ -1447,12 +1525,15 @@
     // Drop Confirmation Modal buttons
     document.getElementById('btn-drop-confirm-yes')?.addEventListener('click', () => {
       sound.click();
+      const actingId = pendingDropPlayerId;
+      pendingDropPlayerId = null;
       closeModal(modals.dropConfirm);
-      engine.dropPlayer();
+      engine.dropPlayer(actingId || undefined);
     });
 
     document.getElementById('btn-drop-confirm-cancel')?.addEventListener('click', () => {
       sound.click();
+      pendingDropPlayerId = null;
       closeModal(modals.dropConfirm);
     });
 
@@ -1563,6 +1644,8 @@
     // U: Undo
     window.addEventListener('keydown', (e) => {
       if (['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) return;
+      // Ignore shortcuts while any dialog (drop confirm, sold, settings...) is open
+      if (document.querySelector('.modal-overlay:not(.hidden)')) return;
       if (engine.state !== 'AUCTION' || !engine.auction) return;
 
       if (!engine.auction.isOpen) {

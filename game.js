@@ -89,7 +89,7 @@
       if (!topics || topics.length === 0) return 'TFI Movies';
       if (topics.length === 1) return topics[0].name;
       if (topics.length === 2) return `${topics[0].name} + ${topics[1].name}`;
-      return `${topics.length} Combined Topics`;
+      return `${topics[0].name} + ${topics.length - 1} more topics`;
     }
 
     // Build the composite "topic" used by the arena UI
@@ -529,11 +529,15 @@
       return true;
     }
 
-    // Current turn player drops from bidding on this movie
-    dropPlayer() {
+    // Current turn player drops from bidding on this movie.
+    // playerId is the player who confirmed the drop; it must still be their turn.
+    dropPlayer(playerId) {
       if (!this.auction || !this.auction.isOpen) return false;
 
-      const currentTurnPlayer = this.players.find(p => p.id === this.auction.turnPlayerId);
+      const actingId = playerId || this.auction.turnPlayerId;
+      if (actingId !== this.auction.turnPlayerId) return false;
+
+      const currentTurnPlayer = this.players.find(p => p.id === actingId);
       if (!currentTurnPlayer) return false;
 
       // Opener cannot drop before opening
@@ -672,7 +676,7 @@
       this.archiveCurrentGame();
 
       // Clear current saved game
-      localStorage.removeItem(STORAGE_KEY_CURRENT);
+      try { localStorage.removeItem(STORAGE_KEY_CURRENT); } catch (e) { /* storage blocked */ }
 
       this.notify('GAME_ENDED', {
         players: this.players,
@@ -828,7 +832,7 @@
     }
 
     clearSavedGame() {
-      localStorage.removeItem(STORAGE_KEY_CURRENT);
+      try { localStorage.removeItem(STORAGE_KEY_CURRENT); } catch (e) { /* storage blocked */ }
     }
 
     // Past Game History (FR-16)
@@ -867,7 +871,7 @@
     }
 
     clearPastGames() {
-      localStorage.removeItem(STORAGE_KEY_HISTORY);
+      try { localStorage.removeItem(STORAGE_KEY_HISTORY); } catch (e) { /* storage blocked */ }
     }
   }
 
