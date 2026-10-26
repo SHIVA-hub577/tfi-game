@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "topics": [
     {
       "id": "any-tfi",
@@ -7,126 +7,3095 @@
       "category": "general",
       "movies": [
         {
-          "id": "any-tfi-01",
-          "title": "Okkadu"
+          "id": "any-tfi-001",
+          "title": "1: Nenokkadine"
         },
         {
-          "id": "any-tfi-02",
-          "title": "Pokiri"
+          "id": "any-tfi-002",
+          "title": "100% Love"
         },
         {
-          "id": "any-tfi-03",
-          "title": "Magadheera"
+          "id": "any-tfi-003",
+          "title": "12A Railway Colony"
         },
         {
-          "id": "any-tfi-04",
-          "title": "Eega"
+          "id": "any-tfi-004",
+          "title": "143"
         },
         {
-          "id": "any-tfi-05",
-          "title": "Baahubali: The Beginning"
+          "id": "any-tfi-005",
+          "title": "18 Pages"
         },
         {
-          "id": "any-tfi-06",
-          "title": "Baahubali 2: The Conclusion"
+          "id": "any-tfi-006",
+          "title": "47 Rojulu"
         },
         {
-          "id": "any-tfi-07",
-          "title": "RRR"
+          "id": "any-tfi-007",
+          "title": "A Aa"
         },
         {
-          "id": "any-tfi-08",
-          "title": "Pushpa: The Rise"
+          "id": "any-tfi-008",
+          "title": "Aa Okkati Adakku"
         },
         {
-          "id": "any-tfi-09",
+          "id": "any-tfi-009",
+          "title": "Aadavaallu Meeku Joharlu"
+        },
+        {
+          "id": "any-tfi-010",
+          "title": "Aadi"
+        },
+        {
+          "id": "any-tfi-011",
+          "title": "Aagadu"
+        },
+        {
+          "id": "any-tfi-012",
+          "title": "Aaha Kalyanam"
+        },
+        {
+          "id": "any-tfi-013",
+          "title": "Aakhari Poratam"
+        },
+        {
+          "id": "any-tfi-014",
+          "title": "Aalasyam Amrutam"
+        },
+        {
+          "id": "any-tfi-015",
+          "title": "Aalaya Sikharam"
+        },
+        {
+          "id": "any-tfi-016",
+          "title": "Aapathbandhavudu"
+        },
+        {
+          "id": "any-tfi-017",
+          "title": "Aarani Mantalu"
+        },
+        {
+          "id": "any-tfi-018",
+          "title": "Aatadista"
+        },
+        {
+          "id": "any-tfi-019",
+          "title": "Aavida Maa Aavide"
+        },
+        {
+          "id": "any-tfi-020",
+          "title": "Abbaigaru"
+        },
+        {
+          "id": "any-tfi-021",
+          "title": "Abhilasha"
+        },
+        {
+          "id": "any-tfi-022",
+          "title": "Acharya"
+        },
+        {
+          "id": "any-tfi-023",
+          "title": "Action 3D"
+        },
+        {
+          "id": "any-tfi-024",
+          "title": "Adavari Matalaku Ardhalu Verule"
+        },
+        {
+          "id": "any-tfi-025",
+          "title": "Adavi Donga"
+        },
+        {
+          "id": "any-tfi-026",
+          "title": "Adavi Ramudu"
+        },
+        {
+          "id": "any-tfi-027",
+          "title": "Adhinayakudu"
+        },
+        {
+          "id": "any-tfi-028",
+          "title": "Adhipathi"
+        },
+        {
+          "id": "any-tfi-029",
+          "title": "Adhurs"
+        },
+        {
+          "id": "any-tfi-030",
+          "title": "Adipurush"
+        },
+        {
+          "id": "any-tfi-031",
+          "title": "Aditya 369"
+        },
+        {
+          "id": "any-tfi-032",
+          "title": "Aggiramudu"
+        },
+        {
+          "id": "any-tfi-033",
+          "title": "Agni"
+        },
+        {
+          "id": "any-tfi-034",
+          "title": "Agni Gundam"
+        },
+        {
+          "id": "any-tfi-035",
+          "title": "Agni Putrudu"
+        },
+        {
+          "id": "any-tfi-036",
+          "title": "Agni Samskaram"
+        },
+        {
+          "id": "any-tfi-037",
+          "title": "Agnyaathavaasi"
+        },
+        {
+          "id": "any-tfi-038",
+          "title": "Agyaat"
+        },
+        {
+          "id": "any-tfi-039",
+          "title": "Aha Naa Pellanta"
+        },
+        {
+          "id": "any-tfi-040",
+          "title": "Ajeyudu"
+        },
+        {
+          "id": "any-tfi-041",
+          "title": "Akbar Salim Anarkali"
+        },
+        {
+          "id": "any-tfi-042",
+          "title": "Akhanda"
+        },
+        {
+          "id": "any-tfi-043",
+          "title": "Akhanda 2: Thaandavam"
+        },
+        {
+          "id": "any-tfi-044",
+          "title": "Akkada Ammayi Ikkada Abbayi"
+        },
+        {
+          "id": "any-tfi-045",
+          "title": "Ala Modalaindi"
+        },
+        {
+          "id": "any-tfi-046",
           "title": "Ala Vaikunthapurramuloo"
         },
         {
-          "id": "any-tfi-10",
-          "title": "Arjun Reddy"
+          "id": "any-tfi-047",
+          "title": "Allare Allari"
         },
         {
-          "id": "any-tfi-11",
-          "title": "Geetha Govindam"
+          "id": "any-tfi-048",
+          "title": "Allari"
         },
         {
-          "id": "any-tfi-12",
-          "title": "Mahanati"
+          "id": "any-tfi-049",
+          "title": "Allari Alludu"
         },
         {
-          "id": "any-tfi-13",
-          "title": "Jersey"
+          "id": "any-tfi-050",
+          "title": "Allari Bullodu"
         },
         {
-          "id": "any-tfi-14",
-          "title": "Sita Ramam"
+          "id": "any-tfi-051",
+          "title": "Allari Krishnayya"
         },
         {
-          "id": "any-tfi-15",
-          "title": "Athadu"
+          "id": "any-tfi-052",
+          "title": "Allari Pidugu"
         },
         {
-          "id": "any-tfi-16",
-          "title": "Dookudu"
+          "id": "any-tfi-053",
+          "title": "Allari Priyudu"
         },
         {
-          "id": "any-tfi-17",
-          "title": "Srimanthudu"
+          "id": "any-tfi-054",
+          "title": "Allari Ramudu"
         },
         {
-          "id": "any-tfi-18",
+          "id": "any-tfi-055",
+          "title": "Alluda Majaka"
+        },
+        {
+          "id": "any-tfi-056",
+          "title": "Alludu Seenu"
+        },
+        {
+          "id": "any-tfi-057",
+          "title": "Amar Akbar Anthony"
+        },
+        {
+          "id": "any-tfi-058",
+          "title": "Amma Nanna O Tamila Ammayi"
+        },
+        {
+          "id": "any-tfi-059",
+          "title": "Ammayi Kosam"
+        },
+        {
+          "id": "any-tfi-060",
+          "title": "Anari"
+        },
+        {
+          "id": "any-tfi-061",
+          "title": "Anasuyamma Gari Alludu"
+        },
+        {
+          "id": "any-tfi-062",
+          "title": "Andarivaadu"
+        },
+        {
+          "id": "any-tfi-063",
+          "title": "Andhrawala"
+        },
+        {
+          "id": "any-tfi-064",
+          "title": "Anjaneyulu"
+        },
+        {
+          "id": "any-tfi-065",
+          "title": "Anji"
+        },
+        {
+          "id": "any-tfi-066",
+          "title": "Ankit, Pallavi & Friends"
+        },
+        {
+          "id": "any-tfi-067",
+          "title": "Annadammula Anubandham"
+        },
+        {
+          "id": "any-tfi-068",
+          "title": "Annamayya"
+        },
+        {
+          "id": "any-tfi-069",
+          "title": "Annavaram"
+        },
+        {
+          "id": "any-tfi-070",
+          "title": "Annayya"
+        },
+        {
+          "id": "any-tfi-071",
+          "title": "Ante Sundaraniki"
+        },
+        {
+          "id": "any-tfi-072",
+          "title": "Antham"
+        },
+        {
+          "id": "any-tfi-073",
+          "title": "Anuraga Devatha"
+        },
+        {
+          "id": "any-tfi-074",
+          "title": "Anveshana"
+        },
+        {
+          "id": "any-tfi-075",
+          "title": "Apoorva Sahodarulu"
+        },
+        {
+          "id": "any-tfi-076",
+          "title": "Aradhana"
+        },
+        {
+          "id": "any-tfi-077",
+          "title": "Aranyakanda"
+        },
+        {
+          "id": "any-tfi-078",
+          "title": "Aravinda Sametha Veera Raghava"
+        },
+        {
+          "id": "any-tfi-079",
+          "title": "Aravindha Sametha"
+        },
+        {
+          "id": "any-tfi-080",
+          "title": "Arjun"
+        },
+        {
+          "id": "any-tfi-081",
+          "title": "Arjun Suravaram"
+        },
+        {
+          "id": "any-tfi-082",
           "title": "Arundhati"
         },
         {
-          "id": "any-tfi-19",
-          "title": "Sye Raa Narasimha Reddy"
+          "id": "any-tfi-083",
+          "title": "Arya"
         },
         {
-          "id": "any-tfi-20",
+          "id": "any-tfi-084",
+          "title": "Arya 2"
+        },
+        {
+          "id": "any-tfi-085",
+          "title": "Ashok"
+        },
+        {
+          "id": "any-tfi-086",
+          "title": "Ashoka Chakravarthy"
+        },
+        {
+          "id": "any-tfi-087",
+          "title": "Ashta Chamma"
+        },
+        {
+          "id": "any-tfi-088",
+          "title": "Aswamedham"
+        },
+        {
+          "id": "any-tfi-089",
+          "title": "Athadu"
+        },
+        {
+          "id": "any-tfi-090",
+          "title": "Athaku Yamudu Ammayiki Mogudu"
+        },
+        {
+          "id": "any-tfi-091",
+          "title": "Athidhi"
+        },
+        {
+          "id": "any-tfi-092",
+          "title": "Athili Sattibabu LKG"
+        },
+        {
+          "id": "any-tfi-093",
+          "title": "Atmabhalam"
+        },
+        {
+          "id": "any-tfi-094",
+          "title": "Attarintiki Daredi"
+        },
+        {
+          "id": "any-tfi-095",
+          "title": "Auto Driver"
+        },
+        {
+          "id": "any-tfi-096",
+          "title": "Autonagar Surya"
+        },
+        {
+          "id": "any-tfi-097",
+          "title": "Avunu Valliddaru Ista Paddaru"
+        },
+        {
+          "id": "any-tfi-098",
+          "title": "Azad"
+        },
+        {
+          "id": "any-tfi-099",
+          "title": "Baadshah"
+        },
+        {
+          "id": "any-tfi-100",
+          "title": "Baahubali 2: The Conclusion"
+        },
+        {
+          "id": "any-tfi-101",
+          "title": "Baahubali: The Beginning"
+        },
+        {
+          "id": "any-tfi-102",
+          "title": "Babai – Abbai"
+        },
+        {
+          "id": "any-tfi-103",
+          "title": "Babu Bangaram"
+        },
+        {
+          "id": "any-tfi-104",
+          "title": "Bachchala Malli"
+        },
+        {
+          "id": "any-tfi-105",
+          "title": "Badri"
+        },
+        {
+          "id": "any-tfi-106",
+          "title": "Badrinath"
+        },
+        {
+          "id": "any-tfi-107",
+          "title": "Baladur"
+        },
+        {
+          "id": "any-tfi-108",
+          "title": "Balu"
+        },
+        {
+          "id": "any-tfi-109",
+          "title": "Balupu"
+        },
+        {
+          "id": "any-tfi-110",
+          "title": "Bandhalu Anubandhalu"
+        },
+        {
+          "id": "any-tfi-111",
+          "title": "Bangaram"
+        },
+        {
+          "id": "any-tfi-112",
+          "title": "Bangarraju"
+        },
+        {
+          "id": "any-tfi-113",
+          "title": "Bangaru Bullodu"
+        },
+        {
+          "id": "any-tfi-114",
+          "title": "Bava Nachadu"
+        },
+        {
+          "id": "any-tfi-115",
+          "title": "Bavagaru Bagunnara?"
+        },
+        {
+          "id": "any-tfi-116",
+          "title": "Bendu Apparao R.M.P"
+        },
+        {
+          "id": "any-tfi-117",
+          "title": "Bengal Tiger"
+        },
+        {
+          "id": "any-tfi-118",
+          "title": "Bhaagamathie"
+        },
+        {
+          "id": "any-tfi-119",
+          "title": "Bhadra"
+        },
+        {
+          "id": "any-tfi-120",
+          "title": "Bhagavanth Kesari"
+        },
+        {
+          "id": "any-tfi-121",
+          "title": "Bhageeratha"
+        },
+        {
+          "id": "any-tfi-122",
+          "title": "Bhai"
+        },
+        {
+          "id": "any-tfi-123",
+          "title": "Bhairava Dweepam"
+        },
+        {
+          "id": "any-tfi-124",
+          "title": "Bhale Bhale Magadivoy"
+        },
+        {
+          "id": "any-tfi-125",
+          "title": "Bhale Donga"
+        },
+        {
+          "id": "any-tfi-126",
+          "title": "Bhale Thammudu"
+        },
+        {
+          "id": "any-tfi-127",
+          "title": "Bhanumati Gari Mogudu"
+        },
+        {
+          "id": "any-tfi-128",
+          "title": "Bharat Ane Nenu"
+        },
+        {
+          "id": "any-tfi-129",
+          "title": "Bharatamlo Arjunudu"
+        },
+        {
+          "id": "any-tfi-130",
+          "title": "Bhargava Ramudu"
+        },
+        {
+          "id": "any-tfi-131",
+          "title": "Bhartha Mahasayulaku Wignyapthi"
+        },
+        {
+          "id": "any-tfi-132",
+          "title": "Bharyabhartala Bhandam"
+        },
+        {
+          "id": "any-tfi-133",
+          "title": "Bheemili Kabaddi Jattu"
+        },
+        {
+          "id": "any-tfi-134",
+          "title": "Bheemla Nayak"
+        },
+        {
+          "id": "any-tfi-135",
+          "title": "Bheeshma"
+        },
+        {
+          "id": "any-tfi-136",
+          "title": "Bholaa Shankar"
+        },
+        {
+          "id": "any-tfi-137",
+          "title": "Big Boss"
+        },
+        {
+          "id": "any-tfi-138",
+          "title": "Billa"
+        },
+        {
+          "id": "any-tfi-139",
+          "title": "Billa Ranga"
+        },
+        {
+          "id": "any-tfi-140",
+          "title": "Blade Babji"
+        },
+        {
+          "id": "any-tfi-141",
+          "title": "Bobbili Raja"
+        },
+        {
+          "id": "any-tfi-142",
+          "title": "Bobbili Simham"
+        },
+        {
+          "id": "any-tfi-143",
+          "title": "Bobby"
+        },
+        {
+          "id": "any-tfi-144",
+          "title": "Bodyguard"
+        },
+        {
+          "id": "any-tfi-145",
+          "title": "Bommana Brothers Chandana Sisters"
+        },
+        {
+          "id": "any-tfi-146",
+          "title": "Boss"
+        },
+        {
+          "id": "any-tfi-147",
+          "title": "Brahma Puthrudu"
+        },
+        {
+          "id": "any-tfi-148",
+          "title": "Brahma Rudrulu"
+        },
+        {
+          "id": "any-tfi-149",
+          "title": "Brahmarshi Viswamitra"
+        },
+        {
+          "id": "any-tfi-150",
+          "title": "Brahmotsavam"
+        },
+        {
+          "id": "any-tfi-151",
+          "title": "Brindavanam"
+        },
+        {
+          "id": "any-tfi-152",
+          "title": "Bro"
+        },
+        {
+          "id": "any-tfi-153",
+          "title": "Brother of Bommali"
+        },
+        {
+          "id": "any-tfi-154",
+          "title": "Bruce Lee: The Fighter"
+        },
+        {
+          "id": "any-tfi-155",
+          "title": "Budget Padmanabhan"
+        },
+        {
+          "id": "any-tfi-156",
+          "title": "Bujjigadu"
+        },
+        {
+          "id": "any-tfi-157",
+          "title": "Bunny"
+        },
+        {
+          "id": "any-tfi-158",
+          "title": "Businessman"
+        },
+        {
+          "id": "any-tfi-159",
+          "title": "Cameraman Gangatho Rambabu"
+        },
+        {
+          "id": "any-tfi-160",
+          "title": "Captain Nagarjun"
+        },
+        {
+          "id": "any-tfi-161",
+          "title": "Chaitanya"
+        },
+        {
+          "id": "any-tfi-162",
+          "title": "Chakram"
+        },
+        {
+          "id": "any-tfi-163",
+          "title": "Chal Mohan Ranga"
+        },
+        {
+          "id": "any-tfi-164",
+          "title": "Challenge"
+        },
+        {
+          "id": "any-tfi-165",
+          "title": "Chalo"
+        },
+        {
+          "id": "any-tfi-166",
+          "title": "Chanakya Shapadham"
+        },
+        {
+          "id": "any-tfi-167",
+          "title": "Chandamama"
+        },
+        {
+          "id": "any-tfi-168",
+          "title": "Chandipriya"
+        },
+        {
+          "id": "any-tfi-169",
+          "title": "Chandralekha"
+        },
+        {
+          "id": "any-tfi-170",
+          "title": "Chantabbai"
+        },
+        {
+          "id": "any-tfi-171",
+          "title": "Chanti"
+        },
+        {
+          "id": "any-tfi-172",
+          "title": "Chatrapathi"
+        },
+        {
+          "id": "any-tfi-173",
+          "title": "Check"
+        },
+        {
+          "id": "any-tfi-174",
+          "title": "Chennakesava Reddy"
+        },
+        {
+          "id": "any-tfi-175",
+          "title": "Chinababu"
+        },
+        {
+          "id": "any-tfi-176",
+          "title": "Chinarayudu"
+        },
+        {
+          "id": "any-tfi-177",
+          "title": "Chinnadana Nee Kosam"
+        },
+        {
+          "id": "any-tfi-178",
+          "title": "Chintakayala Ravi"
+        },
+        {
+          "id": "any-tfi-179",
+          "title": "Chiranjeevi"
+        },
+        {
+          "id": "any-tfi-180",
+          "title": "Chiranjeevulu"
+        },
+        {
+          "id": "any-tfi-181",
+          "title": "Chirutha"
+        },
+        {
+          "id": "any-tfi-182",
+          "title": "Choodalani Vundi"
+        },
+        {
+          "id": "any-tfi-183",
+          "title": "Collector Gari Abbai"
+        },
+        {
+          "id": "any-tfi-184",
+          "title": "Coolie No.1"
+        },
+        {
+          "id": "any-tfi-185",
+          "title": "Courier Boy Kalyan"
+        },
+        {
+          "id": "any-tfi-186",
+          "title": "Criminal"
+        },
+        {
+          "id": "any-tfi-187",
+          "title": "Daaku Maharaaj"
+        },
+        {
+          "id": "any-tfi-188",
+          "title": "Daana Veera Soora Karna"
+        },
+        {
+          "id": "any-tfi-189",
+          "title": "Daddy"
+        },
+        {
+          "id": "any-tfi-190",
+          "title": "Damarukam"
+        },
+        {
+          "id": "any-tfi-191",
+          "title": "Dammu"
+        },
+        {
+          "id": "any-tfi-192",
+          "title": "Danger"
+        },
+        {
+          "id": "any-tfi-193",
+          "title": "Darling"
+        },
+        {
+          "id": "any-tfi-194",
+          "title": "Daruvu"
+        },
+        {
+          "id": "any-tfi-195",
+          "title": "Dasara"
+        },
+        {
+          "id": "any-tfi-196",
+          "title": "Dear Comrade"
+        },
+        {
+          "id": "any-tfi-197",
+          "title": "Denikaina Ready"
+        },
+        {
+          "id": "any-tfi-198",
+          "title": "Desamuduru"
+        },
+        {
+          "id": "any-tfi-199",
+          "title": "Desoddarakudu"
+        },
+        {
+          "id": "any-tfi-200",
+          "title": "Devadas"
+        },
+        {
+          "id": "any-tfi-201",
+          "title": "Devara: Part 1"
+        },
+        {
+          "id": "any-tfi-202",
+          "title": "Devara: Part 2"
+        },
+        {
+          "id": "any-tfi-203",
+          "title": "Devi Putrudu"
+        },
+        {
+          "id": "any-tfi-204",
+          "title": "Devudu Chesina Manushulu"
+        },
+        {
+          "id": "any-tfi-205",
+          "title": "Dhada"
+        },
+        {
+          "id": "any-tfi-206",
+          "title": "Dhairyam"
+        },
+        {
+          "id": "any-tfi-207",
+          "title": "Dhairyavanthudu"
+        },
+        {
+          "id": "any-tfi-208",
+          "title": "Dhamaka"
+        },
+        {
+          "id": "any-tfi-209",
+          "title": "Dhanalakshmi, I Love You"
+        },
+        {
+          "id": "any-tfi-210",
+          "title": "Dharma Chakram"
+        },
+        {
+          "id": "any-tfi-211",
+          "title": "Dharmakshetram"
+        },
+        {
+          "id": "any-tfi-212",
+          "title": "Dhruva"
+        },
+        {
+          "id": "any-tfi-213",
+          "title": "Dhruva Nakshatram"
+        },
+        {
+          "id": "any-tfi-214",
+          "title": "Dictator"
+        },
+        {
+          "id": "any-tfi-215",
+          "title": "Dil"
+        },
+        {
+          "id": "any-tfi-216",
+          "title": "Disco"
+        },
+        {
+          "id": "any-tfi-217",
+          "title": "Disco King"
+        },
+        {
+          "id": "any-tfi-218",
+          "title": "Disco Raja"
+        },
+        {
+          "id": "any-tfi-219",
+          "title": "DJ: Duvvada Jagannadham"
+        },
+        {
+          "id": "any-tfi-220",
+          "title": "Don"
+        },
+        {
+          "id": "any-tfi-221",
+          "title": "Don Seenu"
+        },
+        {
+          "id": "any-tfi-222",
+          "title": "Donga"
+        },
+        {
+          "id": "any-tfi-223",
+          "title": "Donga Mogudu"
+        },
+        {
+          "id": "any-tfi-224",
+          "title": "Donga Police"
+        },
+        {
+          "id": "any-tfi-225",
+          "title": "Donga Ramudu"
+        },
+        {
+          "id": "any-tfi-226",
+          "title": "Dongala Bandi"
+        },
+        {
+          "id": "any-tfi-227",
+          "title": "Dongala Mutha"
+        },
+        {
+          "id": "any-tfi-228",
+          "title": "Dongodu"
+        },
+        {
+          "id": "any-tfi-229",
+          "title": "Dookudu"
+        },
+        {
+          "id": "any-tfi-230",
+          "title": "Double iSmart"
+        },
+        {
+          "id": "any-tfi-231",
+          "title": "Drohi"
+        },
+        {
+          "id": "any-tfi-232",
+          "title": "Drona"
+        },
+        {
+          "id": "any-tfi-233",
+          "title": "Drushyam"
+        },
+        {
+          "id": "any-tfi-234",
+          "title": "Drushyam 2"
+        },
+        {
+          "id": "any-tfi-235",
+          "title": "Dubai Seenu"
+        },
+        {
+          "id": "any-tfi-236",
+          "title": "Eagle"
+        },
+        {
+          "id": "any-tfi-237",
+          "title": "Ee Abbai Chala Manchodu"
+        },
+        {
+          "id": "any-tfi-238",
+          "title": "Eega"
+        },
+        {
+          "id": "any-tfi-239",
+          "title": "Eenadu"
+        },
+        {
+          "id": "any-tfi-240",
+          "title": "Eeswar"
+        },
+        {
+          "id": "any-tfi-241",
+          "title": "Ek Niranjan"
+        },
+        {
+          "id": "any-tfi-242",
+          "title": "Ekkadiki Pothavu Chinnavada"
+        },
+        {
+          "id": "any-tfi-243",
+          "title": "Extra Ordinary Man"
+        },
+        {
+          "id": "any-tfi-244",
+          "title": "F2: Fun and Frustration"
+        },
+        {
+          "id": "any-tfi-245",
+          "title": "Fauzi"
+        },
+        {
+          "id": "any-tfi-246",
+          "title": "Gabbar Singh"
+        },
+        {
+          "id": "any-tfi-247",
+          "title": "Gaddalakonda Ganesh"
+        },
+        {
+          "id": "any-tfi-248",
+          "title": "Gaganam"
+        },
+        {
+          "id": "any-tfi-249",
+          "title": "Game Changer"
+        },
+        {
+          "id": "any-tfi-250",
+          "title": "Gamyam"
+        },
+        {
+          "id": "any-tfi-251",
+          "title": "Gandeevam"
+        },
+        {
+          "id": "any-tfi-252",
+          "title": "Ganesh"
+        },
+        {
+          "id": "any-tfi-253",
+          "title": "Gang Leader"
+        },
+        {
+          "id": "any-tfi-254",
+          "title": "Gangotri"
+        },
+        {
+          "id": "any-tfi-255",
+          "title": "Gautamiputra Satakarni"
+        },
+        {
+          "id": "any-tfi-256",
+          "title": "Geetanjali"
+        },
+        {
+          "id": "any-tfi-257",
+          "title": "Geetha Govindam"
+        },
+        {
+          "id": "any-tfi-258",
+          "title": "Gemini"
+        },
+        {
+          "id": "any-tfi-259",
+          "title": "Gentleman"
+        },
+        {
+          "id": "any-tfi-260",
+          "title": "Gharana Bullodu"
+        },
+        {
+          "id": "any-tfi-261",
+          "title": "Gharana Mogudu"
+        },
+        {
+          "id": "any-tfi-262",
+          "title": "Gharshana"
+        },
+        {
+          "id": "any-tfi-263",
+          "title": "Godfather"
+        },
+        {
+          "id": "any-tfi-264",
+          "title": "Gokulamlo Seeta"
+        },
+        {
+          "id": "any-tfi-265",
+          "title": "Goonda"
+        },
+        {
+          "id": "any-tfi-266",
+          "title": "Gopala Gopala"
+        },
+        {
+          "id": "any-tfi-267",
+          "title": "Gopi – Goda Meedha Pilli"
+        },
+        {
+          "id": "any-tfi-268",
+          "title": "Goppinti Alludu"
+        },
+        {
+          "id": "any-tfi-269",
+          "title": "Govinda Govinda"
+        },
+        {
+          "id": "any-tfi-270",
+          "title": "Govindudu Andarivadele"
+        },
+        {
+          "id": "any-tfi-271",
+          "title": "Greekuveerudu"
+        },
+        {
+          "id": "any-tfi-272",
+          "title": "Gudachari No. 1"
+        },
+        {
+          "id": "any-tfi-273",
+          "title": "Gudumba Shankar"
+        },
+        {
+          "id": "any-tfi-274",
+          "title": "Gunde Jaari Gallanthayyinde"
+        },
+        {
+          "id": "any-tfi-275",
+          "title": "Guntur Kaaram"
+        },
+        {
+          "id": "any-tfi-276",
+          "title": "Guru"
+        },
+        {
+          "id": "any-tfi-277",
+          "title": "Happy"
+        },
+        {
+          "id": "any-tfi-278",
           "title": "Happy Days"
         },
         {
-          "id": "any-tfi-21",
-          "title": "Fidaa"
+          "id": "any-tfi-279",
+          "title": "Hari Hara Veera Mallu"
         },
         {
-          "id": "any-tfi-22",
-          "title": "Hanu-Man"
+          "id": "any-tfi-280",
+          "title": "Heart Attack"
         },
         {
-          "id": "any-tfi-23",
-          "title": "Bommarillu"
+          "id": "any-tfi-281",
+          "title": "Hello Brother"
         },
         {
-          "id": "any-tfi-24",
-          "title": "Manmadhudu"
+          "id": "any-tfi-282",
+          "title": "Hero"
         },
         {
-          "id": "any-tfi-25",
-          "title": "Pelli Choopulu"
+          "id": "any-tfi-283",
+          "title": "Hi Nanna"
         },
         {
-          "id": "any-tfi-26",
-          "title": "Race Gurram"
+          "id": "any-tfi-284",
+          "title": "HIT: The Third Case"
         },
         {
-          "id": "any-tfi-27",
-          "title": "Ye Maaya Chesave"
+          "id": "any-tfi-285",
+          "title": "Hitler"
         },
         {
-          "id": "any-tfi-28",
+          "id": "any-tfi-286",
+          "title": "Hyderabad Nawabs"
+        },
+        {
+          "id": "any-tfi-287",
+          "title": "I Love You"
+        },
+        {
+          "id": "any-tfi-288",
+          "title": "Iddarammayilatho"
+        },
+        {
+          "id": "any-tfi-289",
+          "title": "Iddaru Iddare"
+        },
+        {
+          "id": "any-tfi-290",
+          "title": "Iddaru Mitrulu"
+        },
+        {
+          "id": "any-tfi-291",
+          "title": "Idhi Katha Kadhu"
+        },
+        {
+          "id": "any-tfi-292",
+          "title": "Idiot"
+        },
+        {
+          "id": "any-tfi-293",
+          "title": "Indra"
+        },
+        {
+          "id": "any-tfi-294",
+          "title": "Inspector Pratap"
+        },
+        {
+          "id": "any-tfi-295",
+          "title": "Intiguttu"
+        },
+        {
+          "id": "any-tfi-296",
+          "title": "Intlo Deyyam Nakem Bhayam"
+        },
+        {
+          "id": "any-tfi-297",
+          "title": "Intlo Illalu Vantintlo Priyuralu"
+        },
+        {
+          "id": "any-tfi-298",
+          "title": "Intlo Ramayya Veedilo Krishnayya"
+        },
+        {
+          "id": "any-tfi-299",
+          "title": "Irumudi"
+        },
+        {
+          "id": "any-tfi-300",
+          "title": "Ishq"
+        },
+        {
+          "id": "any-tfi-301",
+          "title": "iSmart Shankar"
+        },
+        {
+          "id": "any-tfi-302",
+          "title": "Itlu Maredumilli Prajaneekam"
+        },
+        {
+          "id": "any-tfi-303",
+          "title": "Itlu Sravani Subramanyam"
+        },
+        {
+          "id": "any-tfi-304",
+          "title": "Jaanu"
+        },
+        {
+          "id": "any-tfi-305",
+          "title": "Jagadam"
+        },
+        {
+          "id": "any-tfi-306",
+          "title": "Jagadeka Veerudu Athiloka Sundari"
+        },
+        {
+          "id": "any-tfi-307",
+          "title": "Jai Chiranjeeva"
+        },
+        {
+          "id": "any-tfi-308",
+          "title": "Jai Lava Kusa"
+        },
+        {
+          "id": "any-tfi-309",
+          "title": "Jai Simha"
+        },
+        {
+          "id": "any-tfi-310",
+          "title": "Jaitra Yatra"
+        },
+        {
+          "id": "any-tfi-311",
+          "title": "Jalsa"
+        },
+        {
+          "id": "any-tfi-312",
+          "title": "James Bond"
+        },
+        {
+          "id": "any-tfi-313",
+          "title": "Janaki Ramudu"
+        },
+        {
+          "id": "any-tfi-314",
+          "title": "Janani Janmabhoomi"
+        },
+        {
+          "id": "any-tfi-315",
+          "title": "Janatha Garage"
+        },
+        {
+          "id": "any-tfi-316",
+          "title": "Janda Pai Kapiraju"
+        },
+        {
+          "id": "any-tfi-317",
+          "title": "Jathara"
+        },
+        {
+          "id": "any-tfi-318",
+          "title": "Jayam"
+        },
+        {
+          "id": "any-tfi-319",
+          "title": "Jayam Manadera"
+        },
+        {
+          "id": "any-tfi-320",
+          "title": "Jayammu Nischayammu Raa"
+        },
+        {
+          "id": "any-tfi-321",
+          "title": "Jersey"
+        },
+        {
+          "id": "any-tfi-322",
+          "title": "Johnny"
+        },
+        {
+          "id": "any-tfi-323",
+          "title": "Julayi"
+        },
+        {
+          "id": "any-tfi-324",
+          "title": "Jump Jilani"
+        },
+        {
+          "id": "any-tfi-325",
+          "title": "Juniors"
+        },
+        {
+          "id": "any-tfi-326",
+          "title": "Jwala"
+        },
+        {
+          "id": "any-tfi-327",
+          "title": "Kaali"
+        },
+        {
+          "id": "any-tfi-328",
+          "title": "Kalavar King"
+        },
+        {
+          "id": "any-tfi-329",
+          "title": "Kalisundam Raa"
+        },
+        {
+          "id": "any-tfi-330",
+          "title": "Kaliyuga Krishnudu"
+        },
+        {
+          "id": "any-tfi-331",
+          "title": "Kaliyuga Pandavulu"
+        },
+        {
+          "id": "any-tfi-332",
           "title": "Kalki 2898 AD"
         },
         {
-          "id": "any-tfi-29",
-          "title": "Salaar: Part 1"
+          "id": "any-tfi-333",
+          "title": "Kalki 2898 AD: Part 2"
         },
         {
-          "id": "any-tfi-30",
+          "id": "any-tfi-334",
+          "title": "Kantri"
+        },
+        {
+          "id": "any-tfi-335",
+          "title": "Karthikeya"
+        },
+        {
+          "id": "any-tfi-336",
+          "title": "Karthikeya 2"
+        },
+        {
+          "id": "any-tfi-337",
+          "title": "Katamarayudu"
+        },
+        {
+          "id": "any-tfi-338",
+          "title": "Kathanayakudu"
+        },
+        {
+          "id": "any-tfi-339",
+          "title": "Kattula Kondayya"
+        },
+        {
+          "id": "any-tfi-340",
+          "title": "Kedi"
+        },
+        {
+          "id": "any-tfi-341",
+          "title": "Keshava"
+        },
+        {
+          "id": "any-tfi-342",
+          "title": "Kevvu Keka"
+        },
+        {
+          "id": "any-tfi-343",
+          "title": "Khadgam"
+        },
+        {
+          "id": "any-tfi-344",
+          "title": "Khaidi No. 150"
+        },
+        {
+          "id": "any-tfi-345",
+          "title": "Khaidi No. 786"
+        },
+        {
+          "id": "any-tfi-346",
+          "title": "Khaleja"
+        },
+        {
+          "id": "any-tfi-347",
+          "title": "Khatarnak"
+        },
+        {
+          "id": "any-tfi-348",
+          "title": "Khiladi"
+        },
+        {
+          "id": "any-tfi-349",
+          "title": "Khuda Gawah"
+        },
+        {
+          "id": "any-tfi-350",
+          "title": "Kick"
+        },
+        {
+          "id": "any-tfi-351",
+          "title": "Kick 2"
+        },
+        {
+          "id": "any-tfi-352",
+          "title": "Killer"
+        },
+        {
+          "id": "any-tfi-353",
+          "title": "King"
+        },
+        {
+          "id": "any-tfi-354",
+          "title": "Kirai Dada"
+        },
+        {
+          "id": "any-tfi-355",
+          "title": "Kirrak Party"
+        },
+        {
+          "id": "any-tfi-356",
+          "title": "Kithakithalu"
+        },
+        {
+          "id": "any-tfi-357",
+          "title": "Kondapalli Raja"
+        },
+        {
+          "id": "any-tfi-358",
+          "title": "Kondaveeti Donga"
+        },
+        {
+          "id": "any-tfi-359",
+          "title": "Kondaveeti Raja"
+        },
+        {
+          "id": "any-tfi-360",
+          "title": "Kothala Raayudu"
+        },
+        {
+          "id": "any-tfi-361",
+          "title": "Kotta Alludu"
+        },
+        {
+          "id": "any-tfi-362",
+          "title": "Kottapeta Rowdy"
+        },
+        {
+          "id": "any-tfi-363",
+          "title": "Krack"
+        },
+        {
+          "id": "any-tfi-364",
+          "title": "Krishna"
+        },
+        {
+          "id": "any-tfi-365",
+          "title": "Krishna Babu"
+        },
+        {
+          "id": "any-tfi-366",
+          "title": "Krishna Gaadi Veera Prema Gaadha"
+        },
+        {
+          "id": "any-tfi-367",
+          "title": "Kshana Kshanam"
+        },
+        {
+          "id": "any-tfi-368",
+          "title": "Kshemamga Velli Labhamga Randi"
+        },
+        {
+          "id": "any-tfi-369",
+          "title": "Kubera"
+        },
+        {
+          "id": "any-tfi-370",
+          "title": "Kukka Katuku Cheppu Debba"
+        },
+        {
+          "id": "any-tfi-371",
+          "title": "Kumari 21F"
+        },
+        {
+          "id": "any-tfi-372",
+          "title": "Kurumbu"
+        },
+        {
+          "id": "any-tfi-373",
+          "title": "Kushi"
+        },
+        {
+          "id": "any-tfi-374",
+          "title": "Laati"
+        },
+        {
+          "id": "any-tfi-375",
+          "title": "Laddu Babu"
+        },
+        {
+          "id": "any-tfi-376",
+          "title": "Lakshmi"
+        },
+        {
+          "id": "any-tfi-377",
+          "title": "Lakshmi Narasimha"
+        },
+        {
+          "id": "any-tfi-378",
+          "title": "Lankeshwarudu"
+        },
+        {
+          "id": "any-tfi-379",
+          "title": "Legend"
+        },
+        {
+          "id": "any-tfi-380",
+          "title": "LIE"
+        },
+        {
+          "id": "any-tfi-381",
+          "title": "Liger"
+        },
+        {
+          "id": "any-tfi-382",
+          "title": "Lion"
+        },
+        {
+          "id": "any-tfi-383",
+          "title": "Lorry Driver"
+        },
+        {
+          "id": "any-tfi-384",
+          "title": "Love In Singapore"
+        },
+        {
+          "id": "any-tfi-385",
+          "title": "Maa Alludu Very Good"
+        },
+        {
+          "id": "any-tfi-386",
+          "title": "Maaro"
+        },
+        {
+          "id": "any-tfi-387",
+          "title": "Macherla Niyojakavargam"
+        },
+        {
+          "id": "any-tfi-388",
+          "title": "Madatha Kaja"
+        },
+        {
+          "id": "any-tfi-389",
+          "title": "Maestro"
+        },
+        {
+          "id": "any-tfi-390",
+          "title": "Maga Maharaju"
+        },
+        {
+          "id": "any-tfi-391",
+          "title": "Magadheera"
+        },
+        {
+          "id": "any-tfi-392",
+          "title": "Magadheerudu"
+        },
+        {
+          "id": "any-tfi-393",
+          "title": "Mahanati"
+        },
+        {
+          "id": "any-tfi-394",
+          "title": "Maharathi"
+        },
+        {
+          "id": "any-tfi-395",
+          "title": "Maharshi"
+        },
+        {
+          "id": "any-tfi-396",
+          "title": "Majili"
+        },
+        {
+          "id": "any-tfi-397",
+          "title": "Majnu"
+        },
+        {
+          "id": "any-tfi-398",
+          "title": "Malliswari"
+        },
+        {
+          "id": "any-tfi-399",
+          "title": "Mama Manchu Alludu Kanchu"
+        },
+        {
+          "id": "any-tfi-400",
+          "title": "Mana Shankara Vara Prasad Garu"
+        },
+        {
+          "id": "any-tfi-401",
+          "title": "Mana Voori Pandavulu"
+        },
+        {
+          "id": "any-tfi-402",
+          "title": "Manam"
+        },
+        {
+          "id": "any-tfi-403",
+          "title": "Manasichanu"
+        },
+        {
+          "id": "any-tfi-404",
+          "title": "Manasichi Choodu"
+        },
+        {
+          "id": "any-tfi-405",
+          "title": "Manchu Pallaki"
+        },
+        {
+          "id": "any-tfi-406",
+          "title": "Mangammagari Manavadu"
+        },
+        {
+          "id": "any-tfi-407",
+          "title": "Manmadhudu"
+        },
+        {
+          "id": "any-tfi-408",
+          "title": "Manmadhudu 2"
+        },
+        {
+          "id": "any-tfi-409",
+          "title": "Marana Mrudangam"
+        },
+        {
+          "id": "any-tfi-410",
+          "title": "Maryada Ramanna"
+        },
+        {
+          "id": "any-tfi-411",
+          "title": "Masala"
+        },
+        {
+          "id": "any-tfi-412",
+          "title": "Mass"
+        },
+        {
+          "id": "any-tfi-413",
+          "title": "Mass Jathara"
+        },
+        {
+          "id": "any-tfi-414",
+          "title": "Master"
+        },
+        {
+          "id": "any-tfi-415",
+          "title": "Mechanic Alludu"
+        },
+        {
+          "id": "any-tfi-416",
+          "title": "Meda Meeda Abbayi"
+        },
+        {
+          "id": "any-tfi-417",
+          "title": "Middle Class Abbayi"
+        },
+        {
+          "id": "any-tfi-418",
+          "title": "Mirai"
+        },
+        {
+          "id": "any-tfi-419",
+          "title": "Mirapakay"
+        },
+        {
+          "id": "any-tfi-420",
+          "title": "Mirchi"
+        },
+        {
+          "id": "any-tfi-421",
+          "title": "Miss Shetty Mr Polishetty"
+        },
+        {
+          "id": "any-tfi-422",
+          "title": "Mitrudu"
+        },
+        {
+          "id": "any-tfi-423",
+          "title": "Mogudu Kaavali"
+        },
+        {
+          "id": "any-tfi-424",
+          "title": "Mondi Ghatam"
+        },
+        {
+          "id": "any-tfi-425",
+          "title": "Mosagadu"
+        },
+        {
+          "id": "any-tfi-426",
+          "title": "Most Eligible Bachelor"
+        },
+        {
+          "id": "any-tfi-427",
+          "title": "Mr. Bachchan"
+        },
+        {
+          "id": "any-tfi-428",
+          "title": "Mr. Perfect"
+        },
+        {
+          "id": "any-tfi-429",
+          "title": "Mrugaraju"
+        },
+        {
+          "id": "any-tfi-430",
+          "title": "Muddula Krishnayya"
+        },
+        {
+          "id": "any-tfi-431",
+          "title": "Muddula Mavayya"
+        },
+        {
+          "id": "any-tfi-432",
+          "title": "Muddula Menalludu"
+        },
+        {
+          "id": "any-tfi-433",
+          "title": "Muddula Mogudu"
+        },
+        {
+          "id": "any-tfi-434",
+          "title": "Muddula Priyudu"
+        },
+        {
+          "id": "any-tfi-435",
+          "title": "Mukunda"
+        },
+        {
+          "id": "any-tfi-436",
+          "title": "Munna"
+        },
+        {
+          "id": "any-tfi-437",
+          "title": "Murali Krishnudu"
+        },
+        {
+          "id": "any-tfi-438",
+          "title": "Murari"
+        },
+        {
+          "id": "any-tfi-439",
+          "title": "Muta Mesthri"
+        },
+        {
+          "id": "any-tfi-440",
+          "title": "Muvva Gopaludu"
+        },
+        {
+          "id": "any-tfi-441",
+          "title": "N.T.R: Kathanayakudu"
+        },
+        {
+          "id": "any-tfi-442",
+          "title": "N.T.R: Mahanayakudu"
+        },
+        {
+          "id": "any-tfi-443",
+          "title": "Naa Alludu"
+        },
+        {
+          "id": "any-tfi-444",
+          "title": "Naa Autograph"
+        },
+        {
+          "id": "any-tfi-445",
+          "title": "Naa Peru Surya"
+        },
+        {
+          "id": "any-tfi-446",
+          "title": "Naa Saami Ranga"
+        },
+        {
+          "id": "any-tfi-447",
+          "title": "Naaga"
+        },
+        {
+          "id": "any-tfi-448",
+          "title": "Naagu"
+        },
+        {
+          "id": "any-tfi-449",
+          "title": "Naandhi"
+        },
+        {
+          "id": "any-tfi-450",
+          "title": "Naani"
+        },
+        {
+          "id": "any-tfi-451",
+          "title": "Naayak"
+        },
+        {
+          "id": "any-tfi-452",
+          "title": "Nagavalli"
+        },
+        {
+          "id": "any-tfi-453",
+          "title": "Nakili Manishi"
+        },
+        {
+          "id": "any-tfi-454",
+          "title": "Namo Venkatesa"
+        },
+        {
+          "id": "any-tfi-455",
+          "title": "Nannaku Prematho"
+        },
+        {
+          "id": "any-tfi-456",
+          "title": "Narappa"
+        },
+        {
+          "id": "any-tfi-457",
+          "title": "Narasimha Naidu"
+        },
+        {
+          "id": "any-tfi-458",
+          "title": "Narasimhudu"
+        },
+        {
+          "id": "any-tfi-459",
+          "title": "Nee Kosam"
+        },
+        {
+          "id": "any-tfi-460",
+          "title": "Nela Ticket"
+        },
+        {
+          "id": "any-tfi-461",
+          "title": "Neninthe"
+        },
+        {
+          "id": "any-tfi-462",
+          "title": "Nenu"
+        },
+        {
+          "id": "any-tfi-463",
+          "title": "Nenu Local"
+        },
+        {
+          "id": "any-tfi-464",
+          "title": "Nenunnanu"
+        },
+        {
+          "id": "any-tfi-465",
+          "title": "Neti Siddhartha"
+        },
+        {
+          "id": "any-tfi-466",
+          "title": "Nijam"
+        },
+        {
+          "id": "any-tfi-467",
+          "title": "Ninne Pelladata"
+        },
+        {
+          "id": "any-tfi-468",
+          "title": "Ninne Premistha"
+        },
+        {
+          "id": "any-tfi-469",
+          "title": "Ninnu Choodalani"
+        },
+        {
+          "id": "any-tfi-470",
+          "title": "Ninnu Kori"
+        },
+        {
+          "id": "any-tfi-471",
+          "title": "Nippu"
+        },
+        {
+          "id": "any-tfi-472",
+          "title": "Nippu Ravva"
+        },
+        {
+          "id": "any-tfi-473",
+          "title": "Nippulanti Manishi"
+        },
+        {
+          "id": "any-tfi-474",
+          "title": "Nirnayam"
+        },
+        {
+          "id": "any-tfi-475",
+          "title": "Nishabdham"
+        },
+        {
+          "id": "any-tfi-476",
+          "title": "Nuvvante Naakishtam"
+        },
+        {
+          "id": "any-tfi-477",
+          "title": "Nuvve Nuvve"
+        },
+        {
+          "id": "any-tfi-478",
+          "title": "Nuvvu Naaku Nachav"
+        },
+        {
+          "id": "any-tfi-479",
+          "title": "Nuvvu Vastavani"
+        },
+        {
+          "id": "any-tfi-480",
+          "title": "Nyayam Kavali"
+        },
+        {
+          "id": "any-tfi-481",
+          "title": "O Panaipothundi Babu"
+        },
+        {
+          "id": "any-tfi-482",
+          "title": "Officer"
+        },
+        {
+          "id": "any-tfi-483",
+          "title": "Oh! Baby"
+        },
+        {
+          "id": "any-tfi-484",
+          "title": "Oka Laila Kosam"
+        },
+        {
+          "id": "any-tfi-485",
+          "title": "Oka Raju Oka Rani"
+        },
+        {
+          "id": "any-tfi-486",
+          "title": "Okka Magadu"
+        },
+        {
+          "id": "any-tfi-487",
+          "title": "Okkadu"
+        },
+        {
+          "id": "any-tfi-488",
+          "title": "Om Namo Venkatesaya"
+        },
+        {
+          "id": "any-tfi-489",
+          "title": "Om Shanti"
+        },
+        {
+          "id": "any-tfi-490",
+          "title": "Ontari Poratam"
+        },
+        {
+          "id": "any-tfi-491",
+          "title": "Oopiri"
+        },
+        {
+          "id": "any-tfi-492",
+          "title": "Oorukichina Maata"
+        },
+        {
+          "id": "any-tfi-493",
+          "title": "Oosaravelli"
+        },
+        {
+          "id": "any-tfi-494",
+          "title": "Orange"
+        },
+        {
+          "id": "any-tfi-495",
+          "title": "Ori Devuda"
+        },
+        {
+          "id": "any-tfi-496",
+          "title": "Padutha Theeyaga"
+        },
+        {
+          "id": "any-tfi-497",
+          "title": "Paisa"
+        },
+        {
+          "id": "any-tfi-498",
+          "title": "Paisa Vasool"
+        },
+        {
+          "id": "any-tfi-499",
+          "title": "Palnati Brahmanayudu"
+        },
+        {
+          "id": "any-tfi-500",
+          "title": "Palnati Puli"
+        },
+        {
+          "id": "any-tfi-501",
+          "title": "Pandurangadu"
+        },
+        {
+          "id": "any-tfi-502",
+          "title": "Panjaa"
+        },
+        {
+          "id": "any-tfi-503",
+          "title": "Party"
+        },
+        {
+          "id": "any-tfi-504",
+          "title": "Parugu"
+        },
+        {
+          "id": "any-tfi-505",
+          "title": "Parvathi Parameswarulu"
+        },
+        {
+          "id": "any-tfi-506",
+          "title": "Pattabhishekam"
+        },
+        {
+          "id": "any-tfi-507",
+          "title": "Pavithra Bandham"
+        },
+        {
+          "id": "any-tfi-508",
+          "title": "Peddannayya"
+        },
+        {
+          "id": "any-tfi-509",
+          "title": "Peddi"
+        },
+        {
+          "id": "any-tfi-510",
+          "title": "Pellaindi Kaani"
+        },
+        {
+          "id": "any-tfi-511",
+          "title": "Pelletoori Monagadu"
+        },
+        {
+          "id": "any-tfi-512",
+          "title": "Pellichesukundam"
+        },
+        {
+          "id": "any-tfi-513",
+          "title": "Pilla Zamindar"
+        },
+        {
+          "id": "any-tfi-514",
+          "title": "Pokiri"
+        },
+        {
+          "id": "any-tfi-515",
+          "title": "Pokiri Raja"
+        },
+        {
+          "id": "any-tfi-516",
+          "title": "Pournami"
+        },
+        {
+          "id": "any-tfi-517",
+          "title": "Power"
+        },
+        {
+          "id": "any-tfi-518",
+          "title": "Praanam"
+        },
+        {
+          "id": "any-tfi-519",
+          "title": "Pranam Khareedu"
+        },
+        {
+          "id": "any-tfi-520",
+          "title": "Prema"
+        },
+        {
+          "id": "any-tfi-521",
+          "title": "Prema Nagar"
+        },
+        {
+          "id": "any-tfi-522",
+          "title": "Prema Natakam"
+        },
+        {
+          "id": "any-tfi-523",
+          "title": "Prema Tarangalu"
+        },
+        {
+          "id": "any-tfi-524",
+          "title": "Prema Yuddham"
+        },
+        {
+          "id": "any-tfi-525",
+          "title": "Premaku Velayara"
+        },
+        {
+          "id": "any-tfi-526",
+          "title": "Premante Idera"
+        },
+        {
+          "id": "any-tfi-527",
+          "title": "Prematho Raa"
+        },
+        {
+          "id": "any-tfi-528",
+          "title": "Preminche Manasu"
+        },
+        {
+          "id": "any-tfi-529",
+          "title": "Preminchukundam Raa"
+        },
+        {
+          "id": "any-tfi-530",
+          "title": "President Gari Abbai"
+        },
+        {
+          "id": "any-tfi-531",
+          "title": "President Gari Pellam"
+        },
+        {
+          "id": "any-tfi-532",
+          "title": "Priya"
+        },
+        {
+          "id": "any-tfi-533",
+          "title": "Puli"
+        },
+        {
+          "id": "any-tfi-534",
+          "title": "Puli Bebbuli"
+        },
+        {
+          "id": "any-tfi-535",
+          "title": "Punadhirallu"
+        },
+        {
+          "id": "any-tfi-536",
+          "title": "Punnami Naagu"
+        },
+        {
+          "id": "any-tfi-537",
+          "title": "Pushpa 2: The Rule"
+        },
+        {
+          "id": "any-tfi-538",
+          "title": "Pushpa: The Rise"
+        },
+        {
+          "id": "any-tfi-539",
+          "title": "Raaka"
+        },
+        {
+          "id": "any-tfi-540",
+          "title": "Raam"
+        },
+        {
+          "id": "any-tfi-541",
+          "title": "Rabhasa"
+        },
+        {
+          "id": "any-tfi-542",
+          "title": "Race Gurram"
+        },
+        {
+          "id": "any-tfi-543",
+          "title": "Racha"
+        },
+        {
+          "id": "any-tfi-544",
+          "title": "Radhe Shyam"
+        },
+        {
+          "id": "any-tfi-545",
+          "title": "Ragada"
+        },
+        {
+          "id": "any-tfi-546",
+          "title": "Raghavendra"
+        },
+        {
+          "id": "any-tfi-547",
+          "title": "Raja"
+        },
+        {
+          "id": "any-tfi-548",
+          "title": "Raja Kumarudu"
+        },
+        {
+          "id": "any-tfi-549",
+          "title": "Raja The Great"
+        },
+        {
+          "id": "any-tfi-550",
+          "title": "Raja Vikramarka"
+        },
+        {
+          "id": "any-tfi-551",
+          "title": "Rajanna"
+        },
+        {
+          "id": "any-tfi-552",
+          "title": "Raju Gari Gadhi 2"
+        },
+        {
+          "id": "any-tfi-553",
+          "title": "Rakhi"
+        },
+        {
+          "id": "any-tfi-554",
+          "title": "Rakshana"
+        },
+        {
+          "id": "any-tfi-555",
+          "title": "Rakshasudu"
+        },
+        {
+          "id": "any-tfi-556",
+          "title": "Rakta Bandham"
+        },
+        {
+          "id": "any-tfi-557",
+          "title": "Raktha Tilakam"
+        },
+        {
+          "id": "any-tfi-558",
+          "title": "Ram Raheem"
+        },
+        {
+          "id": "any-tfi-559",
+          "title": "Ramarao on Duty"
+        },
+        {
+          "id": "any-tfi-560",
+          "title": "Ramayanam"
+        },
+        {
+          "id": "any-tfi-561",
+          "title": "Ramayya Vasthavayya"
+        },
+        {
+          "id": "any-tfi-562",
+          "title": "Ramu"
+        },
+        {
+          "id": "any-tfi-563",
+          "title": "Rang De"
+        },
+        {
+          "id": "any-tfi-564",
+          "title": "Rangasthalam"
+        },
+        {
+          "id": "any-tfi-565",
+          "title": "Rani Kasula Rangamma"
+        },
+        {
+          "id": "any-tfi-566",
+          "title": "Ranuva Veeran"
+        },
+        {
+          "id": "any-tfi-567",
+          "title": "Rao Gari Illu"
+        },
+        {
+          "id": "any-tfi-568",
+          "title": "Ratchagan"
+        },
+        {
+          "id": "any-tfi-569",
+          "title": "Ravanasura"
+        },
+        {
+          "id": "any-tfi-570",
+          "title": "Ravoyi Chandamama"
+        },
+        {
+          "id": "any-tfi-571",
+          "title": "Rebel"
+        },
+        {
+          "id": "any-tfi-572",
+          "title": "Rechipo"
+        },
+        {
+          "id": "any-tfi-573",
+          "title": "Ride"
+        },
+        {
+          "id": "any-tfi-574",
+          "title": "Rikshavodu"
+        },
+        {
+          "id": "any-tfi-575",
+          "title": "Robinhood"
+        },
+        {
+          "id": "any-tfi-576",
+          "title": "Roommates"
+        },
+        {
+          "id": "any-tfi-577",
+          "title": "Roshagadu"
+        },
+        {
+          "id": "any-tfi-578",
+          "title": "Rowdy Alludu"
+        },
+        {
+          "id": "any-tfi-579",
+          "title": "Rowdy Inspector"
+        },
+        {
+          "id": "any-tfi-580",
+          "title": "Rowdy Ramudu Konte Krishnudu"
+        },
+        {
+          "id": "any-tfi-581",
+          "title": "RRR"
+        },
+        {
+          "id": "any-tfi-582",
+          "title": "Rudhramadevi"
+        },
+        {
+          "id": "any-tfi-583",
+          "title": "Rudranetra"
+        },
+        {
+          "id": "any-tfi-584",
+          "title": "Ruler"
+        },
+        {
+          "id": "any-tfi-585",
+          "title": "Rustum"
+        },
+        {
+          "id": "any-tfi-586",
+          "title": "S.P. Parshuram"
+        },
+        {
+          "id": "any-tfi-587",
+          "title": "S/O Satyamurthy"
+        },
+        {
+          "id": "any-tfi-588",
+          "title": "Saaho"
+        },
+        {
+          "id": "any-tfi-589",
+          "title": "Sabhaku Namaskaram"
+        },
+        {
+          "id": "any-tfi-590",
+          "title": "Sahasa Samrat"
+        },
+        {
+          "id": "any-tfi-591",
+          "title": "Sahasa Veerudu Sagara Kanya"
+        },
+        {
+          "id": "any-tfi-592",
+          "title": "Sahasame Jeevitham"
+        },
+        {
+          "id": "any-tfi-593",
+          "title": "Saindhav"
+        },
+        {
+          "id": "any-tfi-594",
+          "title": "Sainikudu"
+        },
+        {
+          "id": "any-tfi-595",
+          "title": "Sakutumba Saparivaara Sametam"
+        },
+        {
+          "id": "any-tfi-596",
+          "title": "Salaar: Part 1 – Ceasefire"
+        },
+        {
+          "id": "any-tfi-597",
+          "title": "Salaar: Part 2 – Shouryaanga Parvam"
+        },
+        {
+          "id": "any-tfi-598",
+          "title": "Samarasimha Reddy"
+        },
+        {
+          "id": "any-tfi-599",
+          "title": "Samba"
+        },
+        {
+          "id": "any-tfi-600",
+          "title": "Sambaram"
+        },
+        {
+          "id": "any-tfi-601",
+          "title": "Samudram"
+        },
+        {
+          "id": "any-tfi-602",
+          "title": "Sankarabharanam"
+        },
+        {
+          "id": "any-tfi-603",
+          "title": "Sankeertana"
+        },
+        {
+          "id": "any-tfi-604",
+          "title": "Sankranthi"
+        },
+        {
+          "id": "any-tfi-605",
           "title": "Sankranthiki Vasthunam"
+        },
+        {
+          "id": "any-tfi-606",
+          "title": "Santosham"
+        },
+        {
+          "id": "any-tfi-607",
+          "title": "Saradha Bullodu"
+        },
+        {
+          "id": "any-tfi-608",
+          "title": "Sardaar Gabbar Singh"
+        },
+        {
+          "id": "any-tfi-609",
+          "title": "Sarileru Neekevvaru"
+        },
+        {
+          "id": "any-tfi-610",
+          "title": "Saripodhaa Sanivaaram"
+        },
+        {
+          "id": "any-tfi-611",
+          "title": "Sarkaru Vaari Paata"
+        },
+        {
+          "id": "any-tfi-612",
+          "title": "Sarocharu"
+        },
+        {
+          "id": "any-tfi-613",
+          "title": "Sarrainodu"
+        },
+        {
+          "id": "any-tfi-614",
+          "title": "Sathruvu"
+        },
+        {
+          "id": "any-tfi-615",
+          "title": "Seema Sastri"
+        },
+        {
+          "id": "any-tfi-616",
+          "title": "Seema Simham"
+        },
+        {
+          "id": "any-tfi-617",
+          "title": "Seema Tapakai"
+        },
+        {
+          "id": "any-tfi-618",
+          "title": "Seenu"
+        },
+        {
+          "id": "any-tfi-619",
+          "title": "Seeta Ramula Kalyanam Lankalo"
+        },
+        {
+          "id": "any-tfi-620",
+          "title": "Seetarama Kalyanam"
+        },
+        {
+          "id": "any-tfi-621",
+          "title": "Seethamma Vakitlo Sirimalle Chettu"
+        },
+        {
+          "id": "any-tfi-622",
+          "title": "Seetharama Raju"
+        },
+        {
+          "id": "any-tfi-623",
+          "title": "Selfie Raja"
+        },
+        {
+          "id": "any-tfi-624",
+          "title": "Shaakuntalam"
+        },
+        {
+          "id": "any-tfi-625",
+          "title": "Shadow"
+        },
+        {
+          "id": "any-tfi-626",
+          "title": "Shakti"
+        },
+        {
+          "id": "any-tfi-627",
+          "title": "Shambo Shiva Shambo"
+        },
+        {
+          "id": "any-tfi-628",
+          "title": "Shankar Dada M.B.B.S."
+        },
+        {
+          "id": "any-tfi-629",
+          "title": "Shankar Dada Zindabad"
+        },
+        {
+          "id": "any-tfi-630",
+          "title": "Shanti Kranti"
+        },
+        {
+          "id": "any-tfi-631",
+          "title": "Shirdi Sai"
+        },
+        {
+          "id": "any-tfi-632",
+          "title": "Shiva"
+        },
+        {
+          "id": "any-tfi-633",
+          "title": "Shivamani"
+        },
+        {
+          "id": "any-tfi-634",
+          "title": "Shock"
+        },
+        {
+          "id": "any-tfi-635",
+          "title": "Shyam Singha Roy"
+        },
+        {
+          "id": "any-tfi-636",
+          "title": "Siddu from Sikakulam"
+        },
+        {
+          "id": "any-tfi-637",
+          "title": "Silence Please"
+        },
+        {
+          "id": "any-tfi-638",
+          "title": "Simha"
+        },
+        {
+          "id": "any-tfi-639",
+          "title": "Simhadri"
+        },
+        {
+          "id": "any-tfi-640",
+          "title": "Simham Navvindi"
+        },
+        {
+          "id": "any-tfi-641",
+          "title": "Sindhooram"
+        },
+        {
+          "id": "any-tfi-642",
+          "title": "Sisindri"
+        },
+        {
+          "id": "any-tfi-643",
+          "title": "Sita"
+        },
+        {
+          "id": "any-tfi-644",
+          "title": "Sita Ramam"
+        },
+        {
+          "id": "any-tfi-645",
+          "title": "Siva"
+        },
+        {
+          "id": "any-tfi-646",
+          "title": "Sivudu Sivudu Sivudu"
+        },
+        {
+          "id": "any-tfi-647",
+          "title": "Size Zero"
+        },
+        {
+          "id": "any-tfi-648",
+          "title": "Sneham Kosam"
+        },
+        {
+          "id": "any-tfi-649",
+          "title": "Snehamante Idera"
+        },
+        {
+          "id": "any-tfi-650",
+          "title": "Snehituda"
+        },
+        {
+          "id": "any-tfi-651",
+          "title": "Soggade Chinni Nayana"
+        },
+        {
+          "id": "any-tfi-652",
+          "title": "Spirit"
+        },
+        {
+          "id": "any-tfi-653",
+          "title": "Spy"
+        },
+        {
+          "id": "any-tfi-654",
+          "title": "Spyder"
+        },
+        {
+          "id": "any-tfi-655",
+          "title": "Sri Anjaneyam"
+        },
+        {
+          "id": "any-tfi-656",
+          "title": "Sri Madvirata Parvam"
+        },
+        {
+          "id": "any-tfi-657",
+          "title": "Sri Manjunatha"
+        },
+        {
+          "id": "any-tfi-658",
+          "title": "Sri Rama Bantu"
+        },
+        {
+          "id": "any-tfi-659",
+          "title": "Sri Rama Rajyam"
+        },
+        {
+          "id": "any-tfi-660",
+          "title": "Sri Ramadasu"
+        },
+        {
+          "id": "any-tfi-661",
+          "title": "Sri Tirupati Venkateswara Kalyanam"
+        },
+        {
+          "id": "any-tfi-662",
+          "title": "Srimadvirat Veerabrahmendra Swami Charitra"
+        },
+        {
+          "id": "any-tfi-663",
+          "title": "Srimannarayana"
+        },
+        {
+          "id": "any-tfi-664",
+          "title": "Srimanthudu"
+        },
+        {
+          "id": "any-tfi-665",
+          "title": "Srinivasa Kalyanam"
+        },
+        {
+          "id": "any-tfi-666",
+          "title": "Srirasthu Subhamasthu"
+        },
+        {
+          "id": "any-tfi-667",
+          "title": "Stalin"
+        },
+        {
+          "id": "any-tfi-668",
+          "title": "State Rowdy"
+        },
+        {
+          "id": "any-tfi-669",
+          "title": "Stuartpuram Police Station"
+        },
+        {
+          "id": "any-tfi-670",
+          "title": "Student No. 1"
+        },
+        {
+          "id": "any-tfi-671",
+          "title": "Subash Chandra Bose"
+        },
+        {
+          "id": "any-tfi-672",
+          "title": "Subbu"
+        },
+        {
+          "id": "any-tfi-673",
+          "title": "Sudigadu"
+        },
+        {
+          "id": "any-tfi-674",
+          "title": "Sundarakanda"
+        },
+        {
+          "id": "any-tfi-675",
+          "title": "Super"
+        },
+        {
+          "id": "any-tfi-676",
+          "title": "Super Police"
+        },
+        {
+          "id": "any-tfi-677",
+          "title": "Surya IPS"
+        },
+        {
+          "id": "any-tfi-678",
+          "title": "Surya vs Surya"
+        },
+        {
+          "id": "any-tfi-679",
+          "title": "Suryavamsam"
+        },
+        {
+          "id": "any-tfi-680",
+          "title": "Suswagatham"
+        },
+        {
+          "id": "any-tfi-681",
+          "title": "Swamy Ra Ra"
+        },
+        {
+          "id": "any-tfi-682",
+          "title": "Swarna Kamalam"
+        },
+        {
+          "id": "any-tfi-683",
+          "title": "Swathi Muthyam"
+        },
+        {
+          "id": "any-tfi-684",
+          "title": "Swayambhu"
+        },
+        {
+          "id": "any-tfi-685",
+          "title": "Sye"
+        },
+        {
+          "id": "any-tfi-686",
+          "title": "Sye Raa Narasimha Reddy"
+        },
+        {
+          "id": "any-tfi-687",
+          "title": "Tagore"
+        },
+        {
+          "id": "any-tfi-688",
+          "title": "Takkari"
+        },
+        {
+          "id": "any-tfi-689",
+          "title": "Takkari Donga"
+        },
+        {
+          "id": "any-tfi-690",
+          "title": "Taqdeerwala"
+        },
+        {
+          "id": "any-tfi-691",
+          "title": "Tatamma Kala"
+        },
+        {
+          "id": "any-tfi-692",
+          "title": "Tayaramma Bangarayya"
+        },
+        {
+          "id": "any-tfi-693",
+          "title": "Teen Maar"
+        },
+        {
+          "id": "any-tfi-694",
+          "title": "Temper"
+        },
+        {
+          "id": "any-tfi-695",
+          "title": "Thammudu"
+        },
+        {
+          "id": "any-tfi-696",
+          "title": "Thathayya Premaleelalu"
+        },
+        {
+          "id": "any-tfi-697",
+          "title": "The Gentleman"
+        },
+        {
+          "id": "any-tfi-698",
+          "title": "The Ghost"
+        },
+        {
+          "id": "any-tfi-699",
+          "title": "The India House"
+        },
+        {
+          "id": "any-tfi-700",
+          "title": "The Paradise"
+        },
+        {
+          "id": "any-tfi-701",
+          "title": "The Raja Saab"
+        },
+        {
+          "id": "any-tfi-702",
+          "title": "They Call Him OG"
+        },
+        {
+          "id": "any-tfi-703",
+          "title": "Tholi Prema"
+        },
+        {
+          "id": "any-tfi-704",
+          "title": "Thotti Gang"
+        },
+        {
+          "id": "any-tfi-705",
+          "title": "Thulabharam"
+        },
+        {
+          "id": "any-tfi-706",
+          "title": "Tiger Nageswara Rao"
+        },
+        {
+          "id": "any-tfi-707",
+          "title": "Tiragabadda Telugubidda"
+        },
+        {
+          "id": "any-tfi-708",
+          "title": "Tirugu Leni Manishi"
+        },
+        {
+          "id": "any-tfi-709",
+          "title": "Tirumala Tirupati Venkatesa"
+        },
+        {
+          "id": "any-tfi-710",
+          "title": "Todu Dongalu"
+        },
+        {
+          "id": "any-tfi-711",
+          "title": "Top Hero"
+        },
+        {
+          "id": "any-tfi-712",
+          "title": "Touch Chesi Chudu"
+        },
+        {
+          "id": "any-tfi-713",
+          "title": "Trimurtulu"
+        },
+        {
+          "id": "any-tfi-714",
+          "title": "Trinetrudu"
+        },
+        {
+          "id": "any-tfi-715",
+          "title": "Tuck Jagadish"
+        },
+        {
+          "id": "any-tfi-716",
+          "title": "Tulasi"
+        },
+        {
+          "id": "any-tfi-717",
+          "title": "Two Town Rowdy"
+        },
+        {
+          "id": "any-tfi-718",
+          "title": "Ugram"
+        },
+        {
+          "id": "any-tfi-719",
+          "title": "Ustaad Bhagat Singh"
+        },
+        {
+          "id": "any-tfi-720",
+          "title": "Uu Kodathara? Ulikki Padathara?"
+        },
+        {
+          "id": "any-tfi-721",
+          "title": "V"
+        },
+        {
+          "id": "any-tfi-722",
+          "title": "Vajram"
+        },
+        {
+          "id": "any-tfi-723",
+          "title": "Vakeel Saab"
+        },
+        {
+          "id": "any-tfi-724",
+          "title": "Vamsanikokkadu"
+        },
+        {
+          "id": "any-tfi-725",
+          "title": "Vamsi"
+        },
+        {
+          "id": "any-tfi-726",
+          "title": "Vamsoddharakudu"
+        },
+        {
+          "id": "any-tfi-727",
+          "title": "Varanasi"
+        },
+        {
+          "id": "any-tfi-728",
+          "title": "Varasudochhadu"
+        },
+        {
+          "id": "any-tfi-729",
+          "title": "Varasudu"
+        },
+        {
+          "id": "any-tfi-730",
+          "title": "Varsham"
+        },
+        {
+          "id": "any-tfi-731",
+          "title": "Varudu"
+        },
+        {
+          "id": "any-tfi-732",
+          "title": "Vasantha Maligai"
+        },
+        {
+          "id": "any-tfi-733",
+          "title": "Vasantham"
+        },
+        {
+          "id": "any-tfi-734",
+          "title": "Vasu"
+        },
+        {
+          "id": "any-tfi-735",
+          "title": "Vedam"
+        },
+        {
+          "id": "any-tfi-736",
+          "title": "Veede"
+        },
+        {
+          "id": "any-tfi-737",
+          "title": "Veedu Theda"
+        },
+        {
+          "id": "any-tfi-738",
+          "title": "Veera"
+        },
+        {
+          "id": "any-tfi-739",
+          "title": "Veera Simha Reddy"
+        },
+        {
+          "id": "any-tfi-740",
+          "title": "Veerabhadra"
+        },
+        {
+          "id": "any-tfi-741",
+          "title": "Vemulawada Bheemakavi"
+        },
+        {
+          "id": "any-tfi-742",
+          "title": "Venky"
+        },
+        {
+          "id": "any-tfi-743",
+          "title": "Venky Mama"
+        },
+        {
+          "id": "any-tfi-744",
+          "title": "Veppam"
+        },
+        {
+          "id": "any-tfi-745",
+          "title": "Veta"
+        },
+        {
+          "id": "any-tfi-746",
+          "title": "Vicky Daada"
+        },
+        {
+          "id": "any-tfi-747",
+          "title": "Victory"
+        },
+        {
+          "id": "any-tfi-748",
+          "title": "Vijay"
+        },
+        {
+          "id": "any-tfi-749",
+          "title": "Vijayendra Varma"
+        },
+        {
+          "id": "any-tfi-750",
+          "title": "Vijetha"
+        },
+        {
+          "id": "any-tfi-751",
+          "title": "Vijetha Vikram"
+        },
+        {
+          "id": "any-tfi-752",
+          "title": "Vikram"
+        },
+        {
+          "id": "any-tfi-753",
+          "title": "Vikramarkudu"
+        },
+        {
+          "id": "any-tfi-754",
+          "title": "Vinaya Vidheya Rama"
+        },
+        {
+          "id": "any-tfi-755",
+          "title": "Vishaka Express"
+        },
+        {
+          "id": "any-tfi-756",
+          "title": "Waltair Veerayya"
+        },
+        {
+          "id": "any-tfi-757",
+          "title": "War 2"
+        },
+        {
+          "id": "any-tfi-758",
+          "title": "Wild Dog"
+        },
+        {
+          "id": "any-tfi-759",
+          "title": "Yamadonga"
+        },
+        {
+          "id": "any-tfi-760",
+          "title": "Yamakinkarudu"
+        },
+        {
+          "id": "any-tfi-761",
+          "title": "Yamudiki Mogudu"
+        },
+        {
+          "id": "any-tfi-762",
+          "title": "Yashoda"
+        },
+        {
+          "id": "any-tfi-763",
+          "title": "Ye Maaya Chesave"
+        },
+        {
+          "id": "any-tfi-764",
+          "title": "Yeto Vellipoyindhi Manasu"
+        },
+        {
+          "id": "any-tfi-765",
+          "title": "Yevade Subramanyam"
+        },
+        {
+          "id": "any-tfi-766",
+          "title": "Yevadu"
+        },
+        {
+          "id": "any-tfi-767",
+          "title": "Yogi"
+        },
+        {
+          "id": "any-tfi-768",
+          "title": "Yudda Bhoomi"
+        },
+        {
+          "id": "any-tfi-769",
+          "title": "Yuvaraju"
+        },
+        {
+          "id": "any-tfi-770",
+          "title": "Yuvatha"
+        },
+        {
+          "id": "any-tfi-771",
+          "title": "Zanjeer"
+        },
+        {
+          "id": "any-tfi-772",
+          "title": "Zindabad"
         }
-      ]
+      ],
+      "scope": "Every movie present in this app, de-duplicated."
     },
     {
       "id": "mahesh-babu",
@@ -327,10 +3296,6 @@
           "title": "Mirchi"
         },
         {
-          "id": "prabhas-018",
-          "title": "Action Jackson"
-        },
-        {
           "id": "prabhas-14",
           "title": "Baahubali: The Beginning"
         },
@@ -359,16 +3324,8 @@
           "title": "Kalki 2898 AD"
         },
         {
-          "id": "prabhas-026",
-          "title": "Kannappa"
-        },
-        {
           "id": "prabhas-027",
           "title": "Mirai"
-        },
-        {
-          "id": "prabhas-028",
-          "title": "Baahubali: The Epic"
         },
         {
           "id": "prabhas-029",
@@ -432,10 +3389,6 @@
           "title": "Desamuduru"
         },
         {
-          "id": "allu-arjun-009",
-          "title": "Shankar Dada Zindabad"
-        },
-        {
           "id": "allu-arjun-06",
           "title": "Parugu"
         },
@@ -462,14 +3415,6 @@
         {
           "id": "allu-arjun-11",
           "title": "Iddarammayilatho"
-        },
-        {
-          "id": "allu-arjun-017",
-          "title": "I Am That Change"
-        },
-        {
-          "id": "allu-arjun-018",
-          "title": "Yevadu"
         },
         {
           "id": "allu-arjun-12",
@@ -520,10 +3465,6 @@
       "name": "Jr NTR Movies",
       "category": "hero",
       "movies": [
-        {
-          "id": "jr-ntr-001",
-          "title": "Brahmarshi Viswamitra"
-        },
         {
           "id": "jr-ntr-002",
           "title": "Ramayanam"
@@ -690,10 +3631,6 @@
           "title": "Zanjeer"
         },
         {
-          "id": "ram-charan-007",
-          "title": "Thoofan"
-        },
-        {
           "id": "ram-charan-07",
           "title": "Yevadu"
         },
@@ -710,10 +3647,6 @@
           "title": "Dhruva"
         },
         {
-          "id": "ram-charan-012",
-          "title": "Khaidi No. 150"
-        },
-        {
           "id": "ram-charan-11",
           "title": "Rangasthalam"
         },
@@ -728,10 +3661,6 @@
         {
           "id": "ram-charan-14",
           "title": "Acharya"
-        },
-        {
-          "id": "ram-charan-017",
-          "title": "Kisi Ka Bhai Kisi Ki Jaan"
         },
         {
           "id": "ram-charan-15",
@@ -1272,10 +4201,6 @@
           "title": "Gudumba Shankar"
         },
         {
-          "id": "pawan-kalyan-010",
-          "title": "Shankar Dada M.B.B.S."
-        },
-        {
           "id": "pawan-kalyan-09",
           "title": "Balu"
         },
@@ -1286,10 +4211,6 @@
         {
           "id": "pawan-kalyan-07",
           "title": "Annavaram"
-        },
-        {
-          "id": "pawan-kalyan-014",
-          "title": "Shankar Dada Zindabad"
         },
         {
           "id": "pawan-kalyan-08",
@@ -3494,10 +6415,6 @@
           "title": "Sudigadu"
         },
         {
-          "id": "allari-naresh-45",
-          "title": "Yamudiki Mogudu"
-        },
-        {
           "id": "allari-naresh-47",
           "title": "Kevvu Keka"
         },
@@ -3536,10 +6453,6 @@
         {
           "id": "allari-naresh-58",
           "title": "Meda Meeda Abbayi"
-        },
-        {
-          "id": "allari-naresh-043",
-          "title": "Nela Ticket"
         },
         {
           "id": "allari-naresh-044",
@@ -3588,6 +6501,316 @@
       ],
       "source": "https://en.wikipedia.org/wiki/Allari_Naresh",
       "scope": "Actor film credits; released films and announced projects shown on the linked Wikipedia page, where included."
+    },
+    {
+      "id": "ravi-teja",
+      "name": "Ravi Teja Movies",
+      "category": "hero",
+      "movies": [
+        {
+          "id": "ravi-teja-01",
+          "title": "Laati"
+        },
+        {
+          "id": "ravi-teja-02",
+          "title": "Allari Priyudu"
+        },
+        {
+          "id": "ravi-teja-03",
+          "title": "Varasudu"
+        },
+        {
+          "id": "ravi-teja-04",
+          "title": "Ninne Pelladata"
+        },
+        {
+          "id": "ravi-teja-05",
+          "title": "Sindhooram"
+        },
+        {
+          "id": "ravi-teja-06",
+          "title": "Padutha Theeyaga"
+        },
+        {
+          "id": "ravi-teja-07",
+          "title": "O Panaipothundi Babu"
+        },
+        {
+          "id": "ravi-teja-08",
+          "title": "Manasichi Choodu"
+        },
+        {
+          "id": "ravi-teja-09",
+          "title": "Seetharama Raju"
+        },
+        {
+          "id": "ravi-teja-10",
+          "title": "Preminche Manasu"
+        },
+        {
+          "id": "ravi-teja-11",
+          "title": "Premaku Velayara"
+        },
+        {
+          "id": "ravi-teja-12",
+          "title": "Samudram"
+        },
+        {
+          "id": "ravi-teja-13",
+          "title": "Nee Kosam"
+        },
+        {
+          "id": "ravi-teja-14",
+          "title": "Annayya"
+        },
+        {
+          "id": "ravi-teja-15",
+          "title": "Kshemamga Velli Labhamga Randi"
+        },
+        {
+          "id": "ravi-teja-16",
+          "title": "Manasichanu"
+        },
+        {
+          "id": "ravi-teja-17",
+          "title": "Sakutumba Saparivaara Sametam"
+        },
+        {
+          "id": "ravi-teja-18",
+          "title": "Tirumala Tirupati Venkatesa"
+        },
+        {
+          "id": "ravi-teja-19",
+          "title": "Chiranjeevulu"
+        },
+        {
+          "id": "ravi-teja-20",
+          "title": "Budget Padmanabhan"
+        },
+        {
+          "id": "ravi-teja-21",
+          "title": "Ammayi Kosam"
+        },
+        {
+          "id": "ravi-teja-22",
+          "title": "Itlu Sravani Subramanyam"
+        },
+        {
+          "id": "ravi-teja-23",
+          "title": "Avunu Valliddaru Ista Paddaru"
+        },
+        {
+          "id": "ravi-teja-24",
+          "title": "Idiot"
+        },
+        {
+          "id": "ravi-teja-25",
+          "title": "Khadgam"
+        },
+        {
+          "id": "ravi-teja-26",
+          "title": "Anveshana"
+        },
+        {
+          "id": "ravi-teja-27",
+          "title": "Ee Abbai Chala Manchodu"
+        },
+        {
+          "id": "ravi-teja-28",
+          "title": "Amma Nanna O Tamila Ammayi"
+        },
+        {
+          "id": "ravi-teja-29",
+          "title": "Oka Raju Oka Rani"
+        },
+        {
+          "id": "ravi-teja-30",
+          "title": "Dongodu"
+        },
+        {
+          "id": "ravi-teja-31",
+          "title": "Veede"
+        },
+        {
+          "id": "ravi-teja-32",
+          "title": "Venky"
+        },
+        {
+          "id": "ravi-teja-33",
+          "title": "Naa Autograph"
+        },
+        {
+          "id": "ravi-teja-34",
+          "title": "Chanti"
+        },
+        {
+          "id": "ravi-teja-35",
+          "title": "Bhadra"
+        },
+        {
+          "id": "ravi-teja-36",
+          "title": "Bhageeratha"
+        },
+        {
+          "id": "ravi-teja-37",
+          "title": "Shock"
+        },
+        {
+          "id": "ravi-teja-38",
+          "title": "Vikramarkudu"
+        },
+        {
+          "id": "ravi-teja-39",
+          "title": "Khatarnak"
+        },
+        {
+          "id": "ravi-teja-40",
+          "title": "Dubai Seenu"
+        },
+        {
+          "id": "ravi-teja-41",
+          "title": "Krishna"
+        },
+        {
+          "id": "ravi-teja-42",
+          "title": "Baladur"
+        },
+        {
+          "id": "ravi-teja-43",
+          "title": "Neninthe"
+        },
+        {
+          "id": "ravi-teja-44",
+          "title": "Kick"
+        },
+        {
+          "id": "ravi-teja-45",
+          "title": "Anjaneyulu"
+        },
+        {
+          "id": "ravi-teja-46",
+          "title": "Shambo Shiva Shambo"
+        },
+        {
+          "id": "ravi-teja-47",
+          "title": "Don Seenu"
+        },
+        {
+          "id": "ravi-teja-48",
+          "title": "Mirapakay"
+        },
+        {
+          "id": "ravi-teja-49",
+          "title": "Dongala Mutha"
+        },
+        {
+          "id": "ravi-teja-50",
+          "title": "Veera"
+        },
+        {
+          "id": "ravi-teja-51",
+          "title": "Nippu"
+        },
+        {
+          "id": "ravi-teja-52",
+          "title": "Daruvu"
+        },
+        {
+          "id": "ravi-teja-53",
+          "title": "Devudu Chesina Manushulu"
+        },
+        {
+          "id": "ravi-teja-54",
+          "title": "Sarocharu"
+        },
+        {
+          "id": "ravi-teja-55",
+          "title": "Balupu"
+        },
+        {
+          "id": "ravi-teja-56",
+          "title": "Power"
+        },
+        {
+          "id": "ravi-teja-57",
+          "title": "Kick 2"
+        },
+        {
+          "id": "ravi-teja-58",
+          "title": "Bengal Tiger"
+        },
+        {
+          "id": "ravi-teja-59",
+          "title": "Raja The Great"
+        },
+        {
+          "id": "ravi-teja-60",
+          "title": "Touch Chesi Chudu"
+        },
+        {
+          "id": "ravi-teja-61",
+          "title": "Nela Ticket"
+        },
+        {
+          "id": "ravi-teja-62",
+          "title": "Amar Akbar Anthony"
+        },
+        {
+          "id": "ravi-teja-63",
+          "title": "Disco Raja"
+        },
+        {
+          "id": "ravi-teja-64",
+          "title": "Krack"
+        },
+        {
+          "id": "ravi-teja-65",
+          "title": "Khiladi"
+        },
+        {
+          "id": "ravi-teja-66",
+          "title": "Ramarao on Duty"
+        },
+        {
+          "id": "ravi-teja-67",
+          "title": "Dhamaka"
+        },
+        {
+          "id": "ravi-teja-68",
+          "title": "Ravanasura"
+        },
+        {
+          "id": "ravi-teja-69",
+          "title": "Tiger Nageswara Rao"
+        },
+        {
+          "id": "ravi-teja-70",
+          "title": "Eagle"
+        },
+        {
+          "id": "ravi-teja-71",
+          "title": "Mr. Bachchan"
+        },
+        {
+          "id": "ravi-teja-72",
+          "title": "Mass Jathara"
+        },
+        {
+          "id": "ravi-teja-73",
+          "title": "Bhartha Mahasayulaku Wignyapthi"
+        },
+        {
+          "id": "ravi-teja-74",
+          "title": "Irumudi"
+        },
+        {
+          "id": "ravi-teja-75",
+          "title": "Thulabharam"
+        }
+      ],
+      "source": "https://en.wikipedia.org/wiki/Ravi_Teja_filmography",
+      "scope": "Acting credits; uncredited bit parts, cameos, guest appearances and non-Telugu films excluded."
     }
-  ]
+  ],
+  "updated": "2026-10-26"
 }

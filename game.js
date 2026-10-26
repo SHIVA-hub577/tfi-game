@@ -12,7 +12,10 @@
       this.players = [];
       this.budget = 50;
       this.topicId = 'any-tfi';
+      this.topicIds = ['any-tfi'];
+      this.topics = [];
       this.topic = null;
+      this.skippedMovies = [];
       this.poolSize = 15;
       this.moviesPerPlayer = 3;
       this.moviePool = [];
@@ -52,6 +55,59 @@
       return all.find(t => t.id === id) || all[0];
     }
 
+    // Resolve one or many topic ids into real topic objects
+    resolveTopics(topicIds) {
+      const all = this.getAllTopics();
+      const ids = (Array.isArray(topicIds) ? topicIds : [topicIds]).filter(Boolean);
+      const picked = [];
+      const seen = new Set();
+      ids.forEach(id => {
+        const t = all.find(x => x.id === id);
+        if (t && !seen.has(t.id)) {
+          seen.add(t.id);
+          picked.push(t);
+        }
+      });
+      return picked.length ? picked : (all.length ? [all[0]] : []);
+    }
+
+    // Combined, de-duplicated movie list for one topic or many topics
+    getAvailableMovies(topicIds) {
+      const topics = this.resolveTopics(topicIds);
+      const seen = new Set();
+      const movies = [];
+      topics.forEach(t => (t.movies || []).forEach(m => {
+        const key = String(m.title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+        if (!key || seen.has(key)) return;
+        seen.add(key);
+        movies.push(m);
+      }));
+      return { topics, movies };
+    }
+
+    buildTopicLabel(topics) {
+      if (!topics || topics.length === 0) return 'TFI Movies';
+      if (topics.length === 1) return topics[0].name;
+      if (topics.length === 2) return `${topics[0].name} + ${topics[1].name}`;
+      return `${topics.length} Combined Topics`;
+    }
+
+    // Build the composite "topic" used by the arena UI
+    applyTopicSelection(topicIds) {
+      const { topics, movies } = this.getAvailableMovies(topicIds);
+      this.topics = topics;
+      this.topicIds = topics.map(t => t.id);
+      if (this.topicIds.length === 0) this.topicIds = ['any-tfi'];
+      this.topicId = this.topicIds[0];
+      this.topic = {
+        id: this.topicIds.join('+'),
+        name: this.buildTopicLabel(topics),
+        category: topics.length > 1 ? 'multi' : (topics[0] ? topics[0].category : 'general'),
+        movies
+      };
+      return this.topic;
+    }
+
     // Calculate maximum valid movies-per-player limit
     // PRD: players * limit <= poolSize AND limit <= budget
     static calculateMaxLimit(playersCount, poolSize, budget) {
@@ -60,13 +116,14 @@
       return Math.max(1, Math.min(byPool, budget));
     }
 
-    // Validation for setup
-    validateSetup(playerNames, budget, topicId, poolSize, limit) {
+    // Validation for setup (topicIds may be a single id or an array of ids)
+    validateSetup(playerNames, budget, topicIdOrIds, poolSize, limit) {
       const errors = [];
-      if (![2, 3, 4].includes(playerNames.length)) {
+      const names = Array.isArray(playerNames) ? playerNames : [];
+      if (![2, 3, 4].includes(names.length)) {
         errors.push('Player count must be 2, 3, or 4.');
       }
-      const trimmed = playerNames.map(n => (n || '').trim());
+      const trimmed = names.map(n => (n || '').trim());
       if (trimmed.some(n => n.length === 0)) {
         errors.push('All players must have a name.');
       }
@@ -78,39 +135,45 @@
       if (typeof budget !== 'number' || budget < 20 || budget > 70) {
         errors.push('Budget must be between 20 and 70 coins.');
       }
-      const topic = this.getTopicById(topicId);
-      if (!topic || !topic.movies || topic.movies.length < 6) {
-        errors.push('Selected topic must have at least 6 movies.');
-      } else {
-        if (poolSize < 6 || poolSize > topic.movies.length) {
-          errors.push(`Pool size must be between 6 and ${topic.movies.length}.`);
-        }
+      const { topics, movies } = this.getAvailableMovies(topicIdOrIds);
+      const rawIds = (Array.isArray(topicIdOrIds) ? topicIdOrIds : [topicIdOrIds]).filter(Boolean);
+      if (rawIds.length === 0 || topics.length === 0) {
+        errors.push('Select at least one topic.');
       }
-      const maxLimit = TFIAuctionEngine.calculateMaxLimit(playerNames.length, poolSize, budget);
+      if (movies.length < 6) {
+        errors.push('Selected topics need at least 6 movies combined.');
+      } else if (poolSize < 6 || poolSize > movies.length) {
+        errors.push(`Pool size must be between 6 and ${movies.length}.`);
+      }
+      const maxLimit = TFIAuctionEngine.calculateMaxLimit(names.length, poolSize, budget);
       if (limit < 1 || limit > maxLimit) {
         errors.push(`Movies per player must be between 1 and ${maxLimit}.`);
       }
       return {
         isValid: errors.length === 0,
         errors,
-        maxLimit
+        maxLimit,
+        availableMovies: movies.length
       };
     }
 
     // Initialize new game from setup
     startNewGame(config) {
-      const { playerNames, budget, topicId, poolSize, limit, timerDuration } = config;
-      const validation = this.validateSetup(playerNames, budget, topicId, poolSize, limit);
+      const { playerNames, budget, topicId, topicIds, poolSize, limit, timerDuration } = config;
+      const selection = (Array.isArray(topicIds) && topicIds.length)
+        ? topicIds
+        : (topicId ? [topicId] : ['any-tfi']);
+      const validation = this.validateSetup(playerNames, budget, selection, poolSize, limit);
       if (!validation.isValid) {
         throw new Error(validation.errors.join(' '));
       }
 
       this.budget = budget;
-      this.topicId = topicId;
-      this.topic = this.getTopicById(topicId);
-      this.poolSize = poolSize;
+      this.applyTopicSelection(selection);
+      this.poolSize = Math.min(poolSize, this.topic.movies.length);
       this.moviesPerPlayer = limit;
       this.timerDuration = timerDuration || 0;
+      this.skippedMovies = [];
 
       // Create players
       this.players = playerNames.map((name, idx) => ({
@@ -120,15 +183,16 @@
         wonMovies: []
       }));
 
-      // Pick poolSize random movies from topic
+      // Pick poolSize random movies from the combined topic pool
       const shuffledMovies = [...this.topic.movies].sort(() => Math.random() - 0.5);
-      this.moviePool = shuffledMovies.slice(0, poolSize);
+      this.moviePool = shuffledMovies.slice(0, this.poolSize);
       this.currentMovieIndex = -1;
 
       // Random opener for the very first movie (PRD 5.1: Random for first movie)
       this.openerPlayerIndex = Math.floor(Math.random() * this.players.length);
 
       this.state = 'AUCTION';
+      this.auction = null;
       this.undoStack = [];
 
       this.notify('GAME_STARTED');
@@ -171,6 +235,9 @@
 
     // Start auction for next movie in the pool
     startNextMovie() {
+      // Guard against double-clicks on "Next Movie" skipping a film
+      if (this.state === 'AUCTION' && this.auction) return;
+
       if (this.isGameOver()) {
         this.endGame();
         return;
@@ -189,7 +256,7 @@
       // that player takes each remaining movie at base price (1 coin) with no bidding!
       if (eligiblePlayers.length === 1) {
         const solePlayer = eligiblePlayers[0];
-        const cost = 1;
+        const cost = Math.min(1, Math.max(0, solePlayer.coins));
         solePlayer.coins -= cost;
         solePlayer.wonMovies.push({
           id: movie.id,
@@ -269,9 +336,8 @@
       });
     }
 
-    // Skip this movie: if a player selects skip before auction opens,
-    // control moves to the next eligible player with the same skip option.
-    // If all eligible players select skip, the movie is skipped and not picked by anyone.
+    // Skip this movie: every eligible player gets asked in turn.
+    // The movie is only discarded when ALL eligible players have passed.
     skipMovie(playerId) {
       if (!this.auction || this.auction.isOpen) return { status: 'invalid' };
       if (this.state === 'SKIPPED' || this.state === 'SOLD') return { status: 'invalid' };
@@ -281,13 +347,19 @@
         this.auction.skipVotes = [];
       }
 
+      const eligiblePlayers = this.getPlayersNeedingMovies();
+      const eligibleIds = eligiblePlayers.map(p => p.id);
+      // Ignore stale votes from players who no longer need a movie
+      this.auction.skipVotes = this.auction.skipVotes.filter(id => eligibleIds.includes(id));
+
+      if (!eligibleIds.includes(currentVoterId)) return { status: 'invalid' };
+
       if (!this.auction.skipVotes.includes(currentVoterId)) {
         this.auction.skipVotes.push(currentVoterId);
       }
 
-      const eligiblePlayers = this.getPlayersNeedingMovies();
       const votesIn = this.auction.skipVotes.length;
-      const votesNeeded = eligiblePlayers.length;
+      const votesNeeded = eligibleIds.length;
 
       // Check if ALL eligible players have voted to skip
       if (votesIn >= votesNeeded) {
@@ -302,8 +374,8 @@
         return { status: 'all_skipped' };
       }
 
-      // Find next eligible player who hasn't skipped yet (clockwise order)
-      const currentIdx = eligiblePlayers.findIndex(p => p.id === currentVoterId);
+      // Find next eligible player who hasn't voted yet (clockwise order)
+      const currentIdx = eligibleIds.indexOf(currentVoterId);
       let nextPlayer = null;
       for (let i = 1; i <= eligiblePlayers.length; i++) {
         const candidate = eligiblePlayers[(currentIdx + i) % eligiblePlayers.length];
@@ -325,7 +397,7 @@
         return { status: 'all_skipped' };
       }
 
-      // Pass opening turn & control to next eligible player
+      // Pass the opening decision to the next player who hasn't passed yet
       this.auction.turnPlayerId = nextPlayer.id;
       this.auction.openerId = nextPlayer.id;
 
@@ -343,9 +415,12 @@
     // Opener places opening bid at base price (1 coin)
     openAuction() {
       if (!this.auction || this.auction.isOpen) return;
+      if (this.state !== 'AUCTION') return;
 
       const opener = this.players.find(p => p.id === this.auction.openerId);
       if (!opener) return;
+      if (opener.wonMovies.length >= this.moviesPerPlayer) return;
+      if (this.calculatePlayerMaxBid(opener) < 1) return;
 
       // Re-order active bidders starting with the actual opener who opened it
       const eligiblePlayers = this.getPlayersNeedingMovies();
@@ -496,26 +571,53 @@
       return true;
     }
 
-    // Move turn to next active bidder
+    // Move turn to the next active bidder.
+    // A sale ONLY ends when a single bidder is left standing — the turn must
+    // never jump straight past a player who is still in the auction.
     advanceTurn() {
       if (!this.auction) return;
       const active = this.auction.activeBidders;
+      if (!active || active.length === 0) {
+        this.concludeMovieSale();
+        return;
+      }
       if (active.length <= 1) {
         this.concludeMovieSale();
         return;
       }
 
-      const currentIdx = active.indexOf(this.auction.turnPlayerId);
-      let nextIdx = (currentIdx + 1) % active.length;
-
-      // If next player is already the current leader, they have won!
-      if (active[nextIdx] === this.auction.leaderId) {
+      const activeWithPlayers = active.filter(id => this.players.some(p => p.id === id));
+      if (activeWithPlayers.length === 0) {
+        this.concludeMovieSale();
+        return;
+      }
+      if (activeWithPlayers.length === 1) {
         this.concludeMovieSale();
         return;
       }
 
-      this.auction.turnPlayerId = active[nextIdx];
-      const nextPlayer = this.players.find(p => p.id === this.auction.turnPlayerId);
+      const rawIdx = activeWithPlayers.indexOf(this.auction.turnPlayerId);
+      const startIdx = rawIdx >= 0 ? rawIdx : activeWithPlayers.length - 1;
+
+      // Walk clockwise and hand the turn to the next bidder who is NOT the
+      // current leader (the leader has nothing to raise against).
+      let nextId = null;
+      for (let i = 1; i <= activeWithPlayers.length; i++) {
+        const candidate = activeWithPlayers[(startIdx + i) % activeWithPlayers.length];
+        if (candidate !== this.auction.leaderId) {
+          nextId = candidate;
+          break;
+        }
+      }
+
+      if (!nextId) {
+        // Only the leader is left → the movie is theirs
+        this.concludeMovieSale();
+        return;
+      }
+
+      this.auction.turnPlayerId = nextId;
+      const nextPlayer = this.players.find(p => p.id === nextId);
 
       this.notify('TURN_CHANGED', {
         turnPlayer: nextPlayer
@@ -525,11 +627,12 @@
     // Conclude movie sale when all others dropped or leader unchallenged
     concludeMovieSale() {
       if (!this.auction) return;
+      if (this.state === 'SOLD' || this.state === 'SKIPPED') return;
 
-      const winnerId = this.auction.leaderId || this.auction.activeBidders[0];
+      const winnerId = this.auction.leaderId || (this.auction.activeBidders || [])[0];
       const winner = this.players.find(p => p.id === winnerId);
-      const price = this.auction.currentBid;
       const movie = this.auction.movie;
+      const price = Math.max(0, Math.min(this.auction.currentBid, winner ? winner.coins : 0));
 
       if (winner) {
         winner.coins -= price;
@@ -538,11 +641,20 @@
           title: movie.title,
           price,
           topic: this.topic.name,
-          bidsCount: this.auction.history.length
+          bidsCount: this.auction.history ? this.auction.history.length : 0
         });
+      } else {
+        // Nobody is left to claim it (should never happen) → treat as skipped
+        if (!this.skippedMovies) this.skippedMovies = [];
+        this.skippedMovies.push(movie);
+        this.state = 'SKIPPED';
+        this.notify('MOVIE_SKIPPED', { movie, skippedByAll: true, skipVotes: [] });
+        return;
       }
 
       this.state = 'SOLD';
+      this.auction.turnPlayerId = winner.id;
+      this.auction.activeBidders = [winner.id];
       this.notify('MOVIE_SOLD', {
         movie,
         buyer: winner,
@@ -553,6 +665,7 @@
 
     // End current game (when finished or host confirms early exit)
     endGame() {
+      if (this.state === 'GAME_END') return;
       this.state = 'GAME_END';
 
       // Save to game history
@@ -634,6 +747,7 @@
           players: this.players,
           budget: this.budget,
           topicId: this.topicId,
+          topicIds: this.topicIds,
           poolSize: this.poolSize,
           moviesPerPlayer: this.moviesPerPlayer,
           moviePool: this.moviePool,
@@ -666,11 +780,14 @@
         const item = localStorage.getItem(STORAGE_KEY_CURRENT);
         if (!item) return null;
         const d = JSON.parse(item);
-        const topic = this.getTopicById(d.topicId);
+        const ids = (Array.isArray(d.topicIds) && d.topicIds.length)
+          ? d.topicIds
+          : [d.topicId].filter(Boolean);
+        const savedTopics = this.resolveTopics(ids.length ? ids : ['any-tfi']);
         return {
           playersCount: d.players.length,
           playerNames: d.players.map(p => p.name).join(', '),
-          topicName: topic ? topic.name : 'Tollywood Movies',
+          topicName: this.buildTopicLabel(savedTopics),
           currentRound: (d.currentMovieIndex + 1),
           totalPool: d.poolSize,
           savedAt: d.savedAt
@@ -688,8 +805,10 @@
         this.state = data.state;
         this.players = data.players;
         this.budget = data.budget;
-        this.topicId = data.topicId;
-        this.topic = this.getTopicById(data.topicId);
+        const savedIds = (Array.isArray(data.topicIds) && data.topicIds.length)
+          ? data.topicIds
+          : [data.topicId].filter(Boolean);
+        this.applyTopicSelection(savedIds.length ? savedIds : ['any-tfi']);
         this.poolSize = data.poolSize;
         this.moviesPerPlayer = data.moviesPerPlayer;
         this.moviePool = data.moviePool;

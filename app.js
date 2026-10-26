@@ -38,7 +38,8 @@
     playersCount: 3,
     playerNames: ['Mahesh', 'Charan', 'Bunny', 'Prabhas'],
     budget: 50,
-    topicId: 'any-tfi',
+    topicMode: 'single', // 'single' | 'multi'
+    topicIds: ['any-tfi'],
     categoryFilter: 'all',
     poolSize: 15,
     limit: 3,
@@ -142,6 +143,7 @@
         stopTurnTimer();
         sound.sold();
         confetti.fire(70);
+        renderAuctionArena();
         showSoldCelebration(payload);
         renderScoreboard();
         break;
@@ -213,6 +215,7 @@
 
   // --- SETUP SCREEN LOGIC ---
   function initSetupScreen() {
+    renderTopicModeControls();
     renderPlayerCountControls();
     renderPlayerNameInputs();
     renderBudgetControls();
@@ -220,6 +223,45 @@
     renderTopicCards();
     updatePoolAndLimitControls();
     renderTimerSettingControls();
+    renderPoolPresets();
+  }
+
+  // --- SINGLE vs MULTI TOPIC MODE ---
+  function renderTopicModeControls() {
+    const container = document.getElementById('topic-mode-control');
+    if (!container) return;
+
+    const modes = [
+      { id: 'single', label: '🎯 Single Topic', hint: 'One hero / one film list' },
+      { id: 'multi', label: '🎞️ Multi Topic', hint: 'Pick 2+ heroes, one combined pool' }
+    ];
+
+    container.innerHTML = modes.map(m => `
+      <button type="button" class="segment-btn ${setupState.topicMode === m.id ? 'active' : ''}" data-mode="${m.id}">
+        ${m.label}<small style="display:block; font-weight:400; font-size:0.7rem; opacity:0.8;">${m.hint}</small>
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.segment-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sound.click();
+        const mode = btn.dataset.mode;
+        setupState.topicMode = mode;
+        if (mode === 'single' && setupState.topicIds.length > 1) {
+          setupState.topicIds = [setupState.topicIds[0]];
+        }
+        renderTopicModeControls();
+        renderTopicCards();
+        updatePoolAndLimitControls();
+      });
+    });
+
+    const hint = document.getElementById('topic-mode-hint');
+    if (hint) {
+      hint.innerHTML = setupState.topicMode === 'multi'
+        ? `Tap any number of topics to combine them into one auction pool. Selected: <strong>${setupState.topicIds.length}</strong>`
+        : 'Tap a topic below. Choose Multi Topic to combine two or more hero film lists.';
+    }
   }
 
   function renderPlayerCountControls() {
@@ -375,10 +417,10 @@
     });
 
     grid.innerHTML = filtered.map(topic => {
-      const isSelected = setupState.topicId === topic.id;
+      const isSelected = setupState.topicIds.includes(topic.id);
       return `
-        <div class="topic-card ${isSelected ? 'selected' : ''}" data-topic-id="${topic.id}">
-          <div class="topic-name">${escapeHtml(topic.name)}</div>
+        <div class="topic-card ${isSelected ? 'selected' : ''}" data-topic-id="${topic.id}" role="button" tabindex="0" aria-pressed="${isSelected}">
+          <div class="topic-name">${escapeHtml(topic.name)} ${isSelected ? '<span style="color:var(--gold-primary);">✓</span>' : ''}</div>
           <div class="topic-meta">
             <span class="topic-badge-type">${topic.category}</span>
             <span>🎬 ${topic.movies.length}</span>
@@ -390,7 +432,25 @@
     grid.querySelectorAll('.topic-card').forEach(card => {
       card.addEventListener('click', () => {
         sound.click();
-        setupState.topicId = card.dataset.topicId;
+        const id = card.dataset.topicId;
+
+        // "Any TFI" is the whole catalogue, so it is exclusive: picking it
+        // clears hero picks, and picking a hero drops it.
+        if (id === 'any-tfi') {
+          setupState.topicIds = ['any-tfi'];
+        } else if (setupState.topicMode === 'multi') {
+          let ids = setupState.topicIds.filter(t => t !== 'any-tfi');
+          if (ids.includes(id)) {
+            if (ids.length > 1) ids = ids.filter(t => t !== id);
+          } else {
+            ids = [...ids, id];
+          }
+          setupState.topicIds = ids.length ? ids : [id];
+        } else {
+          setupState.topicIds = [id];
+        }
+
+        renderTopicModeControls();
         renderTopicCards();
         updatePoolAndLimitControls();
       });
@@ -398,10 +458,10 @@
   }
 
   function updatePoolAndLimitControls() {
-    const topic = engine.getTopicById(setupState.topicId);
-    if (!topic) return;
+    const { topics, movies } = engine.getAvailableMovies(setupState.topicIds);
+    if (!topics.length) return;
 
-    const totalInTopic = topic.movies.length;
+    const totalInTopic = movies.length;
     const poolSlider = document.getElementById('pool-size-slider');
     const poolValBadge = document.getElementById('pool-val-badge');
     const poolMaxLabel = document.getElementById('pool-max-label');
@@ -416,6 +476,13 @@
       if (poolMaxLabel) poolMaxLabel.textContent = totalInTopic;
     }
 
+    const selectedLabel = document.getElementById('topic-selected-summary');
+    if (selectedLabel) {
+      selectedLabel.innerHTML = topics.length > 1
+        ? `<strong>${topics.length} topics combined</strong> • ${totalInTopic} unique movies available`
+        : `<strong>${escapeHtml(topics[0].name)}</strong> • ${totalInTopic} movies available`;
+    }
+
     // Limit calculation (movies per player)
     // Formula: players * limit <= poolSize AND limit <= budget
     const maxLimit = TFIAuctionEngine.calculateMaxLimit(setupState.playersCount, setupState.poolSize, setupState.budget);
@@ -428,19 +495,17 @@
 
     if (limitContainer) {
       let chipsHtml = '';
-      for (let i = 1; i <= Math.max(15, maxLimit + 2); i++) {
-        const isValid = i <= maxLimit;
+      for (let i = 1; i <= Math.max(1, maxLimit); i++) {
         const isSelected = setupState.limit === i;
         chipsHtml += `
-          <button type="button" class="chip-btn ${isSelected ? 'active' : ''}" 
-                  data-limit="${i}" ${isValid ? '' : 'disabled'}>
+          <button type="button" class="chip-btn ${isSelected ? 'active' : ''}" data-limit="${i}">
             ${i}
           </button>
         `;
       }
       limitContainer.innerHTML = chipsHtml;
 
-      limitContainer.querySelectorAll('.chip-btn:not(:disabled)').forEach(btn => {
+      limitContainer.querySelectorAll('.chip-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           sound.click();
           setupState.limit = parseInt(btn.dataset.limit, 10);
@@ -457,6 +522,34 @@
         Pool has ${setupState.poolSize} movies (${unplayedCount} will be unplayed). Valid limits: <strong>1 to ${maxLimit}</strong>.
       `;
     }
+
+    renderPoolPresets();
+  }
+
+  // Quick pool-size shortcuts, including "All" for the full combined catalogue
+  function renderPoolPresets() {
+    const container = document.getElementById('pool-preset-chips');
+    if (!container) return;
+
+    const total = engine.getAvailableMovies(setupState.topicIds).movies.length;
+    const presets = [10, 20, 30, 50].filter(n => n >= 6 && n < total);
+    if (!presets.includes(15) && total > 15) presets.unshift(15);
+    const options = [...new Set(presets)].sort((a, b) => a - b);
+    if (total > 6) options.push(total);
+
+    container.innerHTML = options.map(n => `
+      <button type="button" class="chip-btn ${setupState.poolSize === n ? 'active' : ''}" data-pool="${n}">
+        ${n === total ? 'All' : n}
+      </button>
+    `).join('');
+
+    container.querySelectorAll('.chip-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sound.click();
+        setupState.poolSize = parseInt(btn.dataset.pool, 10);
+        updatePoolAndLimitControls();
+      });
+    });
   }
 
   function renderTimerSettingControls() {
@@ -626,6 +719,14 @@
       const minRaise = engine.getMinimumRaise(currentBid);
       const maxBid = turnPlayer ? engine.calculatePlayerMaxBid(turnPlayer) : 0;
 
+      // Everyone still in the auction — a sale only ends when one bidder remains
+      const stillBidding = (auction.activeBidders || [])
+        .map(id => engine.players.find(p => p.id === id))
+        .filter(Boolean)
+        .map(p => p.id === turnPlayer?.id ? `<strong style="color:var(--gold-primary);">${escapeHtml(p.name)}</strong>` : escapeHtml(p.name))
+        .join(' → ');
+      const bidHistoryCount = (auction.history || []).length;
+
       // Quick raise amounts based on PRD:
       // Minimum raise: 1 coin up to a bid of 20, then 2 coins above 20
       // Quick-raise buttons (+1, +2, +5)
@@ -642,6 +743,10 @@
       }).join('');
 
       controlsContainer.innerHTML = `
+        <div style="font-size:0.8rem; color:var(--text-dim); text-align:center; line-height:1.5; margin-bottom:8px;">
+          Still bidding: ${stillBidding}<br>
+          <span style="opacity:0.8;">Drop only ends the movie when one bidder is left (${bidHistoryCount} bids so far)</span>
+        </div>
         <div class="quick-raise-row">
           ${raiseButtonsHtml}
         </div>
@@ -653,7 +758,7 @@
       controlsContainer.querySelectorAll('.quick-raise-btn:not(:disabled)').forEach(btn => {
         btn.addEventListener('click', () => {
           const amount = parseInt(btn.dataset.raise, 10);
-          engine.raiseBid(amount);
+          try { engine.raiseBid(amount); } catch (err) { alert(err.message); }
         });
       });
 
@@ -767,13 +872,17 @@
   function onTimerExpired() {
     const auction = engine.auction;
     if (!auction) return;
+    if (engine.state !== 'AUCTION') return;
 
     if (!auction.isOpen) {
       // Player timed out before opening: auto-skip and pass turn to next player
       engine.skipMovie(auction.turnPlayerId);
     } else {
       // Active bidder timed out: auto-drop
-      engine.dropPlayer();
+      const turnId = auction.turnPlayerId;
+      if (!engine.dropPlayer() && auction.leaderId === turnId) {
+        // Leader cannot drop against their own bid — nothing to do
+      }
     }
   }
 
@@ -1018,6 +1127,168 @@
     openModal(modal);
   }
 
+  // --- SHARE RESULTS AS A PHOTO (canvas → PNG → WhatsApp / any app) ---
+  function roundRectPath(ctx, x, y, w, h, r) {
+    const radius = Math.min(r, w / 2, h / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + radius, y);
+    ctx.arcTo(x + w, y, x + w, y + h, radius);
+    ctx.arcTo(x + w, y + h, x, y + h, radius);
+    ctx.arcTo(x, y + h, x, y, radius);
+    ctx.arcTo(x, y, x + w, y, radius);
+    ctx.closePath();
+  }
+
+  function wrapCanvasText(ctx, text, maxWidth) {
+    const words = String(text).split(/\s+/).filter(Boolean);
+    const lines = [];
+    let line = '';
+    words.forEach(word => {
+      const test = line ? `${line} ${word}` : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function buildResultsCanvas() {
+    const W = 1080;
+    const PAD = 56;
+    const CONTENT_W = W - PAD * 2;
+    const FONT = 'Outfit, "Segoe UI", sans-serif';
+    const movieFont = `500 24px ${FONT}`;
+    const nameFont = `700 34px ${FONT}`;
+
+    const measurer = document.createElement('canvas').getContext('2d');
+    measurer.font = movieFont;
+
+    const blocks = engine.players.map(player => {
+      const lines = [];
+      player.wonMovies.forEach(m => {
+        wrapCanvasText(measurer, `🎬 ${m.title}   —   ${m.price} 🪙`, CONTENT_W - 56)
+          .forEach(l => lines.push(l));
+      });
+      return { player, lines, height: 104 + Math.max(1, lines.length) * 34 };
+    });
+
+    const headerH = 320;
+    const footerH = 110;
+    const gap = 20;
+    const totalH = Math.ceil(headerH + blocks.reduce((sum, b) => sum + b.height + gap, 0) + footerH);
+
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    const canvas = document.createElement('canvas');
+    canvas.width = W * dpr;
+    canvas.height = totalH * dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(dpr, dpr);
+
+    const bg = ctx.createLinearGradient(0, 0, W, totalH);
+    bg.addColorStop(0, '#0a0a12');
+    bg.addColorStop(0.5, '#15101f');
+    bg.addColorStop(1, '#0a0a12');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, totalH);
+
+    const glow = ctx.createRadialGradient(W / 2, 0, 20, W / 2, 0, 560);
+    glow.addColorStop(0, 'rgba(255,183,3,0.30)');
+    glow.addColorStop(1, 'rgba(255,183,3,0)');
+    ctx.fillStyle = glow;
+    ctx.fillRect(0, 0, W, 600);
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffb703';
+    ctx.font = `800 76px ${FONT}`;
+    ctx.fillText('TFI AUCTION', W / 2, 136);
+
+    ctx.fillStyle = '#f1eefb';
+    ctx.font = `600 30px ${FONT}`;
+    const topicName = engine.topic ? engine.topic.name : 'TFI Movies';
+    wrapCanvasText(ctx, topicName, CONTENT_W).slice(0, 2)
+      .forEach((line, i) => ctx.fillText(line, W / 2, 192 + i * 38));
+
+    ctx.fillStyle = '#9a97ad';
+    ctx.font = `500 22px ${FONT}`;
+    const dateText = new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+    ctx.fillText(`Auction results • ${dateText} • Budget ${engine.budget} 🪙 • ${engine.players.length} players`, W / 2, 284);
+
+    ctx.textAlign = 'left';
+    let y = headerH;
+    blocks.forEach(({ player, lines, height }) => {
+      roundRectPath(ctx, PAD, y, CONTENT_W, height, 22);
+      ctx.fillStyle = 'rgba(255,255,255,0.05)';
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,183,3,0.25)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = nameFont;
+      ctx.fillText(player.name, PAD + 28, y + 52);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#ffb703';
+      ctx.font = `700 24px ${FONT}`;
+      const spent = engine.budget - player.coins;
+      ctx.fillText(`${player.coins} 🪙 left • spent ${spent}`, PAD + CONTENT_W - 28, y + 50);
+      ctx.textAlign = 'left';
+
+      ctx.font = movieFont;
+      if (lines.length === 0) {
+        ctx.fillStyle = '#8a8798';
+        ctx.fillText('No movies won', PAD + 28, y + 96);
+      } else {
+        lines.forEach((line, i) => {
+          ctx.fillStyle = i % 2 === 0 ? '#efeaf7' : '#cfc9de';
+          ctx.fillText(line, PAD + 28, y + 96 + i * 34);
+        });
+      }
+      y += height + gap;
+    });
+
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#6f6c80';
+    ctx.font = `500 22px ${FONT}`;
+    ctx.fillText('TFI Auction • Pass & Play • Tollywood Movie Bidding', W / 2, totalH - 44);
+
+    return canvas;
+  }
+
+  async function shareResultsPhoto() {
+    const canvas = buildResultsCanvas();
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+    if (!blob) throw new Error('Image generation failed');
+
+    const fileName = `tfi-auction-${new Date().toISOString().slice(0, 10)}.png`;
+    const file = new File([blob], fileName, { type: 'image/png' });
+    const shareText = `🎬 TFI Auction — ${engine.topic ? engine.topic.name : 'TFI Movies'}`;
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({ files: [file], title: 'TFI Auction Results', text: shareText });
+        return 'shared';
+      } catch (err) {
+        if (err && err.name === 'AbortError') return 'cancelled';
+        // fall through to download
+      }
+    }
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 5000);
+    return 'downloaded';
+  }
+
   // --- UTILS ---
   function escapeHtml(str) {
     if (!str) return '';
@@ -1125,7 +1396,7 @@
         engine.startNewGame({
           playerNames: names,
           budget: setupState.budget,
-          topicId: setupState.topicId,
+          topicIds: [...setupState.topicIds],
           poolSize: setupState.poolSize,
           limit: setupState.limit,
           timerDuration: setupState.timerDuration
@@ -1201,14 +1472,18 @@
     document.getElementById('btn-play-again-same')?.addEventListener('click', () => {
       sound.click();
       const names = engine.players.map(p => p.name);
-      engine.startNewGame({
-        playerNames: names,
-        budget: engine.budget,
-        topicId: engine.topicId,
-        poolSize: engine.poolSize,
-        limit: engine.moviesPerPlayer,
-        timerDuration: engine.timerDuration
-      });
+      try {
+        engine.startNewGame({
+          playerNames: names,
+          budget: engine.budget,
+          topicIds: [...engine.topicIds],
+          poolSize: engine.poolSize,
+          limit: engine.moviesPerPlayer,
+          timerDuration: engine.timerDuration
+        });
+      } catch (err) {
+        alert(err.message);
+      }
     });
 
     document.getElementById('btn-play-again-setup')?.addEventListener('click', () => {
@@ -1231,6 +1506,27 @@
       }).catch(() => {
         alert(text);
       });
+    });
+
+    document.getElementById('btn-share-photo')?.addEventListener('click', async (e) => {
+      sound.click();
+      const btn = e.currentTarget;
+      if (btn.disabled) return;
+      const originalLabel = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '📸 Creating photo…';
+      try {
+        const result = await shareResultsPhoto();
+        if (result === 'downloaded') {
+          alert('Results photo saved to your device! Share it on WhatsApp or anywhere.');
+        }
+      } catch (err) {
+        console.error(err);
+        alert('Sorry, this device could not create the results photo.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalLabel;
+      }
     });
 
     // Toggle unplayed movies accordion in results

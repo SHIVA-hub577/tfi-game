@@ -60,14 +60,15 @@
             📜 Past Games History
           </button>
           <button type="button" class="btn btn-ghost" id="btn-home-catalog">
-            🎞️ Browse 20 Topics & Movies
+            🎞️ Browse 25 Topics & 750+ Movies
           </button>
         </div>
 
         <div class="feature-pills">
           <div class="feat-pill">⚡ 100% Offline</div>
           <div class="feat-pill">👥 2 to 4 Players</div>
-          <div class="feat-pill">🎬 20 Topics (350+ Movies)</div>
+          <div class="feat-pill">🎬 25 Topics (772 Movies)</div>
+          <div class="feat-pill">🎞️ Single or Multi Topic Mode</div>
           <div class="feat-pill">📱 Pass & Play (One Device)</div>
           <div class="feat-pill">🔒 Zero Login / Privacy Safe</div>
         </div>
@@ -131,13 +132,20 @@
         <div class="setup-card">
           <div class="setup-card-title">
             <span class="badge-num">4</span>
-            <strong>Select Auction Topic</strong>
+            <strong>Select Auction Topic(s)</strong>
           </div>
+          <div class="segmented-control" id="topic-mode-control" style="margin-bottom:10px;">
+            <!-- Single Topic / Multi Topic -->
+          </div>
+          <div id="topic-mode-hint" style="font-size:0.8rem; color:var(--text-dim); margin-bottom:10px; line-height:1.45;">
+            Tap a topic below. Choose Multi Topic to combine two or more hero film lists.
+          </div>
+          <div id="topic-selected-summary" style="font-size:0.82rem; color:var(--gold-primary); margin-bottom:10px;"></div>
           <div class="topic-filter-bar" id="topic-filter-bar">
             <!-- Categories: All, General, Hero, Heroine, Director -->
           </div>
           <div class="topic-cards-grid" id="topic-cards-grid">
-            <!-- 20 Topics rendered dynamically -->
+            <!-- 25 Topics rendered dynamically -->
           </div>
         </div>
 
@@ -158,6 +166,8 @@
               <span>Topic Max: <span id="pool-max-label">30</span></span>
             </div>
           </div>
+          <div style="font-size:0.78rem; color:var(--text-muted); margin-top:8px;">Quick Select:</div>
+          <div class="chips-grid" id="pool-preset-chips"></div>
         </div>
 
         <!-- 6. Movies Per Player (Limit) -->
@@ -305,6 +315,9 @@
           <button type="button" class="btn btn-secondary" id="btn-play-again-setup">
             ⚙️ New Setup / Topic
           </button>
+          <button type="button" class="btn btn-secondary" id="btn-share-photo">
+            📸 Share Results as Photo (WhatsApp)
+          </button>
           <button type="button" class="btn btn-ghost" id="btn-share-results">
             📋 Copy Game Summary
           </button>
@@ -324,7 +337,7 @@
           <div class="rule-icon">👥</div>
           <div class="rule-text">
             <h3>1. Setup & Equal Budgets</h3>
-            <p>2, 3, or 4 players play on one device. Everyone starts with the exact same budget of coins (e.g., 50 to 100 🪙). The host chooses 1 of 20 Tollywood topics and the target movies per player.</p>
+            <p>2, 3, or 4 players play on one device. Everyone starts with the same budget of coins. Choose <strong>Single Topic</strong> mode for one hero's film list, or <strong>Multi Topic</strong> mode to combine two or more heroes into one big auction pool.</p>
           </div>
         </div>
 
@@ -332,7 +345,7 @@
           <div class="rule-icon">🔨</div>
           <div class="rule-text">
             <h3>2. Opening the Auction</h3>
-            <p>Movies are auctioned one by one. The rotating opener must place the opening bid at the base price of 1 coin. Every movie gets sold!</p>
+            <p>Movies are auctioned one by one. The rotating opener places the opening bid at 1 coin. Before opening, each player may pass on a movie — every player must pass before it is discarded as unsold.</p>
           </div>
         </div>
 
@@ -340,7 +353,7 @@
           <div class="rule-icon">📈</div>
           <div class="rule-text">
             <h3>3. Bid, Raise, or Drop</h3>
-            <p>Turn passes clockwise. On your turn, you can Raise or Drop. Minimum raise is 1 coin up to 20, and 2 coins above 20. Quick raise buttons (+1, +2, +5) make bidding fast.</p>
+            <p>Turn passes clockwise. On your turn you can Raise or Drop. Minimum raise is 1 coin up to 20, and 2 coins above 20. When a player drops, the turn always moves to the next player still bidding — the movie is only sold once a single bidder remains.</p>
           </div>
         </div>
 
@@ -436,7 +449,7 @@
   <div id="modal-catalog" class="modal-overlay hidden">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title">🎞️ Tollywood Topic Catalog (20 Topics)</h3>
+        <h3 class="modal-title">🎞️ Tollywood Topic Catalog (25 Topics)</h3>
         <button type="button" class="modal-close-btn" data-close-modal="modal-catalog">✕</button>
       </div>
       <div id="catalog-modal-body" style="display:flex; flex-direction:column; gap:12px;">
